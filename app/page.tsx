@@ -1,0 +1,1202 @@
+"use client"
+
+import { Button } from "@/components/ui/button"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Badge } from "@/components/ui/badge"
+import { MobileNav } from "@/components/mobile-nav"
+import { InteractiveFAQ } from "@/components/interactive-faq"
+import { SmoothScroll } from "@/components/smooth-scroll"
+import { AnimatedCounter } from "@/components/animated-counter"
+import { FloatingElements } from "@/components/floating-elements"
+import { SectionReveal } from "@/components/section-reveal"
+import { useState, useEffect } from "react"
+import Link from "next/link"
+import MovingDotsBackground from "@/components/moving-dots-background"
+import { blogPosts } from "@/lib/blog-data"
+import { Instagram, Youtube, Mail, Send, Linkedin } from "lucide-react"
+export default function HomePage() {
+  const [isVisible, setIsVisible] = useState(false)
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+
+  useEffect(() => {
+    setIsVisible(true)
+    
+  }, [])
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-cyan-50">
+      <SmoothScroll />
+
+      {/* Navigation Header */}
+      <header className="w-full bg-white/80 backdrop-blur-md shadow-sm sticky top-0 z-40">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-16">
+            {/* Logo */}
+            <div className="flex items-center">
+              <Link href="/" className="text-lg sm:text-xl font-bold font-serif gradient-text">
+                AI Report Studio
+              </Link>
+            </div>
+
+            {/* Desktop Navigation Menu */}
+            <nav className="hidden md:flex items-center space-x-6 lg:space-x-8">
+              <a
+                href="#"
+                className="text-gray-700 hover:text-blue-600 font-medium transition-colors text-sm lg:text-base"
+              >
+                Home
+              </a>
+              <a
+                href="#about"
+                className="text-gray-700 hover:text-blue-600 font-medium transition-colors text-sm lg:text-base"
+              >
+                About
+              </a>
+              <a
+                href="#features"
+                className="text-gray-700 hover:text-blue-600 font-medium transition-colors text-sm lg:text-base"
+              >
+                Features
+              </a>
+              <a
+                href="#testimonials"
+                className="text-gray-700 hover:text-blue-600 font-medium transition-colors text-sm lg:text-base"
+              >
+                Testimonials
+              </a>
+              <a
+                href="#pricing"
+                className="text-gray-700 hover:text-blue-600 font-medium transition-colors text-sm lg:text-base"
+              >
+                Pricing
+              </a>
+              <Link
+                href="/blog"
+                className="text-gray-700 hover:text-blue-600 font-medium transition-colors text-sm lg:text-base"
+              >
+                Blog
+              </Link>
+              <a
+                href="#faq"
+                className="text-gray-700 hover:text-blue-600 font-medium transition-colors text-sm lg:text-base"
+              >
+                FAQ
+              </a>
+              <a
+                href="#contact"
+                className="text-gray-700 hover:text-blue-600 font-medium transition-colors text-sm lg:text-base"
+              >
+                Contact
+              </a>
+            </nav>
+
+            <MobileNav isOpen={mobileMenuOpen} onToggle={() => setMobileMenuOpen(!mobileMenuOpen)} />
+          </div>
+        </div>
+      </header>
+
+      {/* Hero Section - Enhanced to match reference exactly */}
+      <main className="flex-1">
+        {/* Hero Section */}
+        <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 via-white to-cyan-50 overflow-hidden">
+          <MovingDotsBackground />
+          <FloatingElements />
+
+          <div className="text-center relative z-10">
+            <div
+              className={`inline-flex items-center bg-blue-100/80 backdrop-blur-sm text-blue-800 px-4 py-2 rounded-full text-sm font-medium mb-8 animate-bounce-subtle ${isVisible ? "animate-fade-in-scale" : "opacity-0"}`}
+            >
+              <span className="mr-2 text-green-600">✓</span>
+              Trusted by 5,000+ Students
+            </div>
+
+            <h1
+              className={`text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold font-serif text-gray-900 leading-tight mb-6 px-2 ${isVisible ? "animate-fade-in-up animate-delay-100" : "opacity-0"}`}
+            >
+              Professional AI-Powered
+              <br />
+              <span className="gradient-text animate-gradient-shift">Project Report Generation</span>
+              <br />
+              Platform for Final Year Students
+            </h1>
+
+            <h2
+              className={`text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-cyan-500 mb-8 px-2 animate-pulse-glow ${isVisible ? "animate-fade-in-up animate-delay-200" : "opacity-0"}`}
+            >
+              Transform Ideas into Academic
+              <br />
+              Excellence
+            </h2>
+
+            <p
+              className={`text-base sm:text-lg md:text-xl text-gray-600 mb-12 max-w-4xl mx-auto px-4 sm:px-6 leading-relaxed ${isVisible ? "animate-fade-in-up animate-delay-300" : "opacity-0"}`}
+            >
+              The ultimate AI-powered platform for final year students to generate well-structured, academic project
+              reports with professional templates, citation management, and academic integrity assurance.
+            </p>
+
+            <div
+              className={`grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 mb-12 max-w-2xl mx-auto ${isVisible ? "animate-fade-in-up animate-delay-400" : "opacity-0"}`}
+            >
+              <div className="text-center bg-white/60 backdrop-blur-sm rounded-xl p-6 card-hover animate-float-slow shadow-lg border border-white/20">
+                <AnimatedCounter
+                  end={5000}
+                  suffix="+"
+                  className="text-2xl sm:text-3xl md:text-4xl font-bold text-blue-600 mb-2"
+                />
+                <div className="text-gray-600 text-sm sm:text-base font-medium">Reports Generated</div>
+              </div>
+              <div className="text-center bg-white/60 backdrop-blur-sm rounded-xl p-6 card-hover animate-float-medium animate-delay-500 shadow-lg border border-white/20">
+                <AnimatedCounter
+                  end={1000}
+                  suffix="+"
+                  className="text-2xl sm:text-3xl md:text-4xl font-bold text-blue-600 mb-2"
+                />
+                <div className="text-gray-600 text-sm sm:text-base font-medium">Happy Students</div>
+              </div>
+              <div className="text-center bg-white/60 backdrop-blur-sm rounded-xl p-6 card-hover animate-float-fast animate-delay-1000 shadow-lg border border-white/20">
+                <AnimatedCounter
+                  end={98}
+                  suffix="%"
+                  className="text-2xl sm:text-3xl md:text-4xl font-bold text-blue-600 mb-2"
+                />
+                <div className="text-gray-600 text-sm sm:text-base font-medium">Success Rate</div>
+              </div>
+            </div>
+
+            <div
+              className={`flex flex-col sm:flex-row justify-center items-center gap-4 mb-8 px-4 ${isVisible ? "animate-fade-in-up animate-delay-500" : "opacity-0"}`}
+            >
+              <Button className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-8 py-4 text-base md:text-lg w-full sm:w-auto min-h-[48px] font-semibold btn-hover-effect rounded-xl shadow-lg hover:shadow-xl transition-all duration-300">
+                <span className="relative z-10">Get Started Free</span>
+              </Button>
+              <Button
+                variant="outline"
+                className="px-8 py-4 text-base md:text-lg bg-white/80 backdrop-blur-sm w-full sm:w-auto min-h-[48px] font-semibold btn-hover-effect rounded-xl border-2 border-blue-200 hover:border-blue-400 hover:text-blue-600 hover:bg-blue-50/80 shadow-lg hover:shadow-xl transition-all duration-300"
+              >
+                <span className="relative z-10">Watch Demo Video</span>
+              </Button>
+            </div>
+            {/* 
+            <p
+              className={`text-xs sm:text-sm text-gray-500 px-4 animate-bounce-subtle ${isVisible ? "animate-fade-in-up animate-delay-600" : "opacity-0"}`}
+            >
+              No credit card required • Free 7-day trial • Cancel anytime
+            </p> */}
+          </div>
+        </section>
+
+        {/* About Section */}
+        <section id="about" className="relative bg-gray-50 overflow-hidden">
+          <MovingDotsBackground />
+          <SectionReveal>
+            <section id="about" className="py-12 md:py-20 bg-white relative overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-br from-blue-50/30 to-transparent"></div>
+              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div className="text-center mb-12 md:mb-16">
+                  <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold font-serif text-gray-900 mb-4 animate-fade-in-up px-2">
+                    About AI Report Studio
+                  </h2>
+                  <p className="text-base sm:text-lg md:text-xl text-gray-600 max-w-3xl mx-auto animate-fade-in-up animate-delay-100 px-4 leading-relaxed">
+                    We're dedicated to helping final year students create exceptional project reports that meet academic
+                    standards and showcase their hard work professionally.
+                  </p>
+                </div>
+
+                <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center mb-12 md:mb-16">
+                  <div className="animate-fade-in-left">
+                    <h3 className="text-xl sm:text-2xl md:text-3xl font-bold font-serif text-gray-900 mb-4 px-2">
+                      Our Story & Vision
+                    </h3>
+                    <div className="space-y-4 text-justify px-2">
+                      <p className="text-gray-600 text-base sm:text-lg leading-relaxed">
+                        Founded by a team of educators and technology experts, AI Report Studio was born from the
+                        understanding that final year students face immense pressure to deliver high-quality project
+                        reports while juggling multiple academic responsibilities.
+                      </p>
+                      <p className="text-gray-600 text-base sm:text-lg leading-relaxed">
+                        We believe every student deserves access to professional tools that can help them present their
+                        ideas clearly, maintain academic integrity, and achieve their educational goals with confidence.
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-3 sm:gap-4 animate-fade-in-right">
+                    <div className="text-center p-3 sm:p-4 card-hover bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg min-h-[100px] flex flex-col justify-center animate-float-slow">
+                      <div className="text-xl sm:text-2xl md:text-3xl font-bold text-blue-600">2+</div>
+                      <div className="text-xs sm:text-sm text-gray-600 font-medium">Years of Excellence</div>
+                    </div>
+                    <div className="text-center p-3 sm:p-4 card-hover bg-gradient-to-br from-cyan-50 to-cyan-100 rounded-lg min-h-[100px] flex flex-col justify-center animate-float-medium animate-delay-500">
+                      <div className="text-xl sm:text-2xl md:text-3xl font-bold text-blue-600">5,000+</div>
+                      <div className="text-xs sm:text-sm text-gray-600 font-medium">Reports Generated</div>
+                    </div>
+                    <div className="text-center p-3 sm:p-4 card-hover bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg min-h-[100px] flex flex-col justify-center animate-float-fast animate-delay-1000">
+                      <div className="text-xl sm:text-2xl md:text-3xl font-bold text-blue-600">1,000+</div>
+                      <div className="text-xs sm:text-sm text-gray-600 font-medium">Satisfied Students</div>
+                    </div>
+                    <div className="text-center p-3 sm:p-4 card-hover bg-gradient-to-br from-cyan-50 to-cyan-100 rounded-lg min-h-[100px] flex flex-col justify-center animate-float-medium animate-delay-1500">
+                      <div className="text-xl sm:text-2xl md:text-3xl font-bold text-blue-600">98%</div>
+                      <div className="text-xs sm:text-sm text-gray-600 font-medium">Success Rate</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8">
+                  <div className="text-center animate-fade-in-up p-6 bg-gradient-to-br from-white to-blue-50 rounded-xl shadow-lg card-hover">
+                    <h4 className="text-lg sm:text-xl font-bold font-serif text-gray-900 mb-3">Mission-Driven</h4>
+                    <p className="text-gray-600 text-sm sm:text-base leading-relaxed">
+                      Empowering students to excel in their academic journey with professional-grade report generation
+                      tools.
+                    </p>
+                  </div>
+                  <div className="text-center animate-fade-in-up animate-delay-100 p-6 bg-gradient-to-br from-white to-cyan-50 rounded-xl shadow-lg card-hover">
+                    <h4 className="text-lg sm:text-xl font-bold font-serif text-gray-900 mb-3">Student-Focused</h4>
+                    <p className="text-gray-600 text-sm sm:text-base leading-relaxed">
+                      Built specifically for final year students who need reliable, structured, and well-formatted
+                      project reports.
+                    </p>
+                  </div>
+                  <div className="text-center animate-fade-in-up animate-delay-200 p-6 bg-gradient-to-br from-white to-blue-50 rounded-xl shadow-lg card-hover sm:col-span-2 md:col-span-1">
+                    <h4 className="text-lg sm:text-xl font-bold font-serif text-gray-900 mb-3">Innovation First</h4>
+                    <p className="text-gray-600 text-sm sm:text-base leading-relaxed">
+                      Leveraging cutting-edge AI technology to streamline the report writing process while maintaining
+                      academic integrity.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </SectionReveal>
+        </section>
+
+        {/* Features Section */}
+        <section id="features" className="relative py-10 bg-white overflow-hidden">
+          <MovingDotsBackground />
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-12 md:mb-16">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold font-serif text-gray-900 mb-4 px-2">
+                Why Choose AI Report Studio?
+              </h2>
+              <p className="text-base sm:text-lg md:text-xl text-gray-600 max-w-3xl mx-auto px-4 leading-relaxed">
+                We're not just another report writing tool. We're your academic success partner, designed specifically
+                for the unique needs of final year students.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 md:gap-8 mb-12 md:mb-16">
+              <div className="text-center bg-white rounded-lg p-4 shadow-sm hover:shadow-md transition-all duration-300 hover:scale-105">
+                <AnimatedCounter
+                  end={5000}
+                  suffix="+"
+                  className="text-2xl sm:text-3xl md:text-4xl font-bold text-blue-600 mb-2"
+                />
+                <div className="text-gray-600 text-xs sm:text-sm font-medium">Reports Generated</div>
+              </div>
+              <div className="text-center bg-white rounded-lg p-4 shadow-sm hover:shadow-md transition-all duration-300 hover:scale-105">
+                <AnimatedCounter
+                  end={1000}
+                  suffix="+"
+                  className="text-2xl sm:text-3xl md:text-4xl font-bold text-blue-600 mb-2"
+                />
+                <div className="text-gray-600 text-xs sm:text-sm font-medium">Happy Students</div>
+              </div>
+              <div className="text-center bg-white rounded-lg p-4 shadow-sm hover:shadow-md transition-all duration-300 hover:scale-105">
+                <AnimatedCounter
+                  end={98}
+                  suffix="%"
+                  className="text-2xl sm:text-3xl md:text-4xl font-bold text-blue-600 mb-2"
+                />
+                <div className="text-gray-600 text-xs sm:text-sm font-medium">Success Rate</div>
+              </div>
+              <div className="text-center bg-white rounded-lg p-4 shadow-sm hover:shadow-md transition-all duration-300 hover:scale-105">
+                <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-blue-600 mb-2">4.9/5</div>
+                <div className="text-gray-600 text-xs sm:text-sm font-medium">Average Rating</div>
+              </div>
+            </div>
+
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 md:gap-8">
+              <Card className="transition-all duration-300 hover:shadow-xl hover:scale-105 hover:-translate-y-2 group">
+                <CardHeader className="pb-3">
+                  <CardTitle className="text-base sm:text-lg group-hover:text-blue-600 transition-colors duration-200">
+                    Lightning Fast
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-gray-600 text-sm sm:text-base leading-relaxed">
+                    Generate professional reports in minutes, not days. Our AI-powered platform streamlines the entire
+                    process.
+                  </p>
+                </CardContent>
+              </Card>
+              <Card className="transition-all duration-300 hover:shadow-xl hover:scale-105 hover:-translate-y-2 group">
+                <CardHeader className="pb-3">
+                  <CardTitle className="text-base sm:text-lg group-hover:text-blue-600 transition-colors duration-200">
+                    Academic Integrity
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-gray-600 text-sm sm:text-base leading-relaxed">
+                    Built-in plagiarism detection and original content generation ensure your work meets the highest
+                    academic standards.
+                  </p>
+                </CardContent>
+              </Card>
+              <Card className="transition-all duration-300 hover:shadow-xl hover:scale-105 hover:-translate-y-2 group">
+                <CardHeader className="pb-3">
+                  <CardTitle className="text-base sm:text-lg group-hover:text-blue-600 transition-colors duration-200">
+                    Trusted by Thousands
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-gray-600 text-sm sm:text-base leading-relaxed">
+                    Join over 5,000 successful students who have transformed their academic journey with our platform.
+                  </p>
+                </CardContent>
+              </Card>
+              <Card className="transition-all duration-300 hover:shadow-xl hover:scale-105 hover:-translate-y-2 group">
+                <CardHeader className="pb-3">
+                  <CardTitle className="text-base sm:text-lg group-hover:text-blue-600 transition-colors duration-200">
+                    Proven Results
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-gray-600 text-sm sm:text-base leading-relaxed">
+                    Students using our platform report 40% higher grades and 60% less time spent on formatting.
+                  </p>
+                </CardContent>
+              </Card>
+              <Card className="transition-all duration-300 hover:shadow-xl hover:scale-105 hover:-translate-y-2 group">
+                <CardHeader className="pb-3">
+                  <CardTitle className="text-base sm:text-lg group-hover:text-blue-600 transition-colors duration-200">
+                    PPT Generation
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-gray-600 text-sm sm:text-base leading-relaxed">
+                    Instantly create polished PowerPoint presentations directly from your project report with AI-driven
+                    slide structuring.
+                  </p>
+                </CardContent>
+              </Card>
+              <Card className="transition-all duration-300 hover:shadow-xl hover:scale-105 hover:-translate-y-2 group">
+                <CardHeader className="pb-3">
+                  <CardTitle className="text-base sm:text-lg group-hover:text-blue-600 transition-colors duration-200">
+                    Viva Questions Generator
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-gray-600 text-sm sm:text-base leading-relaxed">
+                    Get AI-generated viva questions tailored to your project topic, ensuring you’re fully prepared for
+                    evaluations.
+                  </p>
+                </CardContent>
+              </Card>
+              <Card className="transition-all duration-300 hover:shadow-xl hover:scale-105 hover:-translate-y-2 group">
+                <CardHeader className="pb-3">
+                  <CardTitle className="text-base sm:text-lg group-hover:text-blue-600 transition-colors duration-200">
+                    Project Report Audit
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-gray-600 text-sm sm:text-base leading-relaxed">
+                    Comprehensive AI audit to check formatting, citations, grammar, and overall quality before final
+                    submission.
+                  </p>
+                </CardContent>
+              </Card>
+              <Card className="transition-all duration-300 hover:shadow-xl hover:scale-105 hover:-translate-y-2 group">
+                <CardHeader className="pb-3">
+                  <CardTitle className="text-base sm:text-lg group-hover:text-blue-600 transition-colors duration-200">
+                    Collaboration Tools
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-gray-600 text-sm sm:text-base leading-relaxed">
+                    Work with teammates in real time, share drafts, and co-edit reports with seamless version control.
+                  </p>
+                </CardContent>
+              </Card>
+            </div>
+
+            <div className="mt-12 md:mt-16 bg-white rounded-lg p-6 md:p-8 shadow-sm">
+              <h3 className="text-xl sm:text-2xl font-bold font-serif text-gray-900 mb-6 text-center">
+                Everything You Need for Academic Success
+              </h3>
+              <div className="grid sm:grid-cols-2 gap-3 sm:gap-4">
+                <div className="flex items-start space-x-3 p-2">
+                  <span className="text-green-500 mt-1 flex-shrink-0">✓</span>
+                  <span className="text-sm sm:text-base text-gray-700">
+                    AI-powered content suggestions and improvements
+                  </span>
+                </div>
+                <div className="flex items-start space-x-3 p-2">
+                  <span className="text-green-500 mt-1 flex-shrink-0">✓</span>
+                  <span className="text-sm sm:text-base text-gray-700">
+                    Automatic formatting according to academic standards
+                  </span>
+                </div>
+                {/* <div className="flex items-start space-x-3 p-2">
+                  <span className="text-green-500 mt-1 flex-shrink-0">✓</span>
+                  <span className="text-sm sm:text-base text-gray-700">
+                    Built-in citation management and bibliography generation
+                  </span>
+                </div> */}
+                {/* <div className="flex items-start space-x-3 p-2">
+                  <span className="text-green-500 mt-1 flex-shrink-0">✓</span>
+                  <span className="text-sm sm:text-base text-gray-700">
+                    Real-time collaboration with supervisors and peers
+                  </span>
+                </div> */}
+                <div className="flex items-start space-x-3 p-2">
+                  <span className="text-green-500 mt-1 flex-shrink-0">✓</span>
+                  <span className="text-sm sm:text-base text-gray-700">Multiple export formats (PDF, Word, LaTeX)</span>
+                </div>
+                <div className="flex items-start space-x-3 p-2">
+                  <span className="text-green-500 mt-1 flex-shrink-0">✓</span>
+                  <span className="text-sm sm:text-base text-gray-700">
+                    Plagiarism detection and originality reports
+                  </span>
+                </div>
+                <div className="flex items-start space-x-3 p-2">
+                  <span className="text-green-500 mt-1 flex-shrink-0">✓</span>
+                  <span className="text-sm sm:text-base text-gray-700">
+                    Grammar and style checking with suggestions
+                  </span>
+                </div>
+                <div className="flex items-start space-x-3 p-2">
+                  <span className="text-green-500 mt-1 flex-shrink-0">✓</span>
+                  <span className="text-sm sm:text-base text-gray-700">Backup protection</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Testimonials Section */}
+        <section id="testimonials" className="relative py-10 bg-white overflow-hidden">
+          <MovingDotsBackground />
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-16">
+              <h2 className="text-4xl font-bold text-gray-900 mb-4">What Students Say About AI Report Studio</h2>
+              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+                Join thousands of successful students who have transformed their academic journey with our professional
+                report generation platform.
+              </p>
+            </div>
+
+            {/* <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+              <Card>
+                <CardContent className="p-6">
+                  <p className="text-gray-600 mb-4">
+                    "AI Report Studio saved me weeks of formatting and structuring work. My final year project report
+                    looked incredibly professional, and I got an A+ grade!"
+                  </p>
+                  <div className="flex items-center space-x-3">
+                    <img
+                      src="/young-woman-computer-science-headshot.png"
+                      alt="Sarah Johnson"
+                      className="w-12 h-12 rounded-full object-cover"
+                    />
+                    <div>
+                      <div className="font-semibold">Sarah Johnson</div>
+                      <div className="text-sm text-gray-500">Computer Science Student, MIT</div>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+              <Card>
+                <CardContent className="p-6">
+                  <p className="text-gray-600 mb-4">
+                    "The AI-powered suggestions helped me organize my thoughts better. The templates are exactly what
+                    academic institutions expect. Highly recommended!"
+                  </p>
+                  <div className="flex items-center space-x-3">
+                    <img
+                      src="/young-asian-engineer-headshot.png"
+                      alt="Michael Chen"
+                      className="w-12 h-12 rounded-full object-cover"
+                    />
+                    <div>
+                      <div className="font-semibold">Michael Chen</div>
+                      <div className="text-sm text-gray-500">Engineering Student, Stanford University</div>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+              <Card>
+                <CardContent className="p-6">
+                  <p className="text-gray-600 mb-4">
+                    "I was struggling with my capstone project report until I found AI Report Studio. The platform made the
+                    entire process smooth and stress-free."
+                  </p>
+                  <div className="flex items-center space-x-3">
+                    <img
+                      src="/latina-business-student-headshot.png"
+                      alt="Emily Rodriguez"
+                      className="w-12 h-12 rounded-full object-cover"
+                    />
+                    <div>
+                      <div className="font-semibold">Emily Rodriguez</div>
+                      <div className="text-sm text-gray-500">Business Administration, Harvard Business School</div>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+              <Card>
+                <CardContent className="p-6">
+                  <p className="text-gray-600 mb-4">
+                    "The citation management and bibliography features are outstanding. It automatically formatted
+                    everything according to my university's guidelines."
+                  </p>
+                  <div className="flex items-center space-x-3">
+                    <img
+                      src="/placeholder-5u68k.png"
+                      alt="David Thompson"
+                      className="w-12 h-12 rounded-full object-cover"
+                    />
+                    <div>
+                      <div className="font-semibold">David Thompson</div>
+                      <div className="text-sm text-gray-500">Data Science Student, UC Berkeley</div>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+              <Card>
+                <CardContent className="p-6">
+                  <p className="text-gray-600 mb-4">
+                    "As an international student, I was worried about meeting academic writing standards. AI Report Studio
+                    helped me create a report that exceeded expectations."
+                  </p>
+                  <div className="flex items-center space-x-3">
+                    <img
+                      src="/young-indian-woman-psychology-student-headshot.png"
+                      alt="Priya Patel"
+                      className="w-12 h-12 rounded-full object-cover"
+                    />
+                    <div>
+                      <div className="font-semibold">Priya Patel</div>
+                      <div className="text-sm text-gray-500">Psychology Student, Oxford University</div>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+              <Card>
+                <CardContent className="p-6">
+                  <p className="text-gray-600 mb-4">
+                    "The technical diagram integration and equation formatting features are incredible. My engineering
+                    report looked publication-ready."
+                  </p>
+                  <div className="flex items-center space-x-3">
+                    <img
+                      src="/young-engineer-headshot.png"
+                      alt="James Wilson"
+                      className="w-12 h-12 rounded-full object-cover"
+                    />
+                    <div>
+                      <div className="font-semibold">James Wilson</div>
+                      <div className="text-sm text-gray-500">Mechanical Engineering, Georgia Tech</div>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </div> */}
+
+
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+              <Card>
+                <CardContent className="p-6">
+                  <p className="text-gray-600 mb-4">
+                    "AI Report Studio saved me weeks of formatting and structuring work. My final year project report
+                    looked incredibly professional, and I got top grades!"
+                  </p>
+                  <div className="flex items-center space-x-3">
+                    <img
+                      src="/young-woman-computer-science-headshot.png"
+                      alt="Aditi Sharma"
+                      className="w-12 h-12 rounded-full object-cover"
+                    />
+                    <div>
+                      <div className="font-semibold">Aditi Sharma</div>
+                      <div className="text-sm text-gray-500">Computer Science Student, IIT Delhi</div>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardContent className="p-6">
+                  <p className="text-gray-600 mb-4">
+                    "The AI-powered suggestions helped me organize my thoughts better. The templates are exactly what
+                    our professors expect. Highly recommended!"
+                  </p>
+                  <div className="flex items-center space-x-3">
+                    <img
+                      src="/young-asian-engineer-headshot.png"
+                      alt="Rohan Mehta"
+                      className="w-12 h-12 rounded-full object-cover"
+                    />
+                    <div>
+                      <div className="font-semibold">Rohan Mehta</div>
+                      <div className="text-sm text-gray-500">Engineering Student, IIT Bombay</div>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardContent className="p-6">
+                  <p className="text-gray-600 mb-4">
+                    "I was struggling with my capstone project report until I found AI Report Studio. The platform made the
+                    entire process smooth and stress-free."
+                  </p>
+                  <div className="flex items-center space-x-3">
+                    <img
+                      src="/latina-business-student-headshot.png"
+                      alt="Sneha Reddy"
+                      className="w-12 h-12 rounded-full object-cover"
+                    />
+                    <div>
+                      <div className="font-semibold">Sneha Reddy</div>
+                      <div className="text-sm text-gray-500">MBA Student, IIM Ahmedabad</div>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardContent className="p-6">
+                  <p className="text-gray-600 mb-4">
+                    "The citation management and bibliography features are outstanding. It automatically formatted
+                    everything according to my university's guidelines."
+                  </p>
+                  <div className="flex items-center space-x-3">
+                    <img
+                      src="/placeholder-5u68k.png"
+                      alt="Arjun Verma"
+                      className="w-12 h-12 rounded-full object-cover"
+                    />
+                    <div>
+                      <div className="font-semibold">Arjun Verma</div>
+                      <div className="text-sm text-gray-500">Data Science Student, IIIT Hyderabad</div>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardContent className="p-6">
+                  <p className="text-gray-600 mb-4">
+                    "As an international student, I was worried about meeting academic writing standards. AI Report Studio
+                    helped me create a report that exceeded expectations."
+                  </p>
+                  <div className="flex items-center space-x-3">
+                    <img
+                      src="/young-indian-woman-psychology-student-headshot.png"
+                      alt="Priya Patel"
+                      className="w-12 h-12 rounded-full object-cover"
+                    />
+                    <div>
+                      <div className="font-semibold">Priya Patel</div>
+                      <div className="text-sm text-gray-500">Psychology Student, Delhi University</div>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardContent className="p-6">
+                  <p className="text-gray-600 mb-4">
+                    "The technical diagram integration and equation formatting features are incredible. My engineering
+                    report looked publication-ready."
+                  </p>
+                  <div className="flex items-center space-x-3">
+                    <img
+                      src="/young-engineer-headshot.png"
+                      alt="Karan Malhotra"
+                      className="w-12 h-12 rounded-full object-cover"
+                    />
+                    <div>
+                      <div className="font-semibold">Karan Malhotra</div>
+                      <div className="text-sm text-gray-500">Mechanical Engineering, BITS Pilani</div>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+
+
+            {/* <div className="text-center">
+              <div className="flex justify-center items-center space-x-4 text-lg">
+                <span className="font-bold text-blue-600">4.9/5 Average Rating</span>
+                <span>•</span>
+                <span className="font-bold text-blue-600">10,000+ Happy Students</span>
+                <span>•</span>
+                <span className="font-bold text-blue-600">95% Success Rate</span>
+              </div>
+            </div> */}
+          </div>
+        </section>
+
+        {/* Pricing Section */}
+        <section id="pricing" className="relative py-10 bg-gray-50 overflow-hidden">
+          <MovingDotsBackground />
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-16">
+              <h2 className="text-4xl font-bold text-gray-900 mb-4">Pricing Plans</h2>
+              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+                Choose the perfect plan for your academic needs. All plans include our core features with no hidden fees
+                or surprises.
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-3 gap-8 mb-12">
+              <Card>
+                <CardHeader>
+                  <CardTitle className="text-2xl">Starter</CardTitle>
+                  <div className="text-4xl font-bold">Free</div>
+                  <CardDescription>Perfect for trying out our platform</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <ul className="space-y-3 mb-6">
+                    <li className="flex items-center">
+                      <span className="text-green-500 mr-2">✓</span>1 Report per month
+                    </li>
+                    <li className="flex items-center">
+                      <span className="text-green-500 mr-2">✓</span>Basic templates
+                    </li>
+                    <li className="flex items-center">
+                      <span className="text-green-500 mr-2">✓</span>Standard formatting
+                    </li>
+                    <li className="flex items-center">
+                      <span className="text-green-500 mr-2">✓</span>Email support
+                    </li>
+                    <li className="flex items-center">
+                      <span className="text-green-500 mr-2">✓</span>Basic citations
+                    </li>
+                    <li className="flex items-center">
+                      <span className="text-green-500 mr-2">✓</span>PDF export
+                    </li>
+                  </ul>
+                  <Button className="w-full bg-transparent" variant="outline">
+                    Get Started Free
+                  </Button>
+                </CardContent>
+              </Card>
+
+              <Card className="border-blue-500 border-2 relative">
+                <Badge className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-blue-500">Most Popular</Badge>
+                <CardHeader>
+                  <CardTitle className="text-2xl">Student</CardTitle>
+                  <div className="text-4xl font-bold">
+                    $19<span className="text-lg font-normal">/per month</span>
+                  </div>
+                  <CardDescription>Ideal for final year students</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <ul className="space-y-3 mb-6">
+                    <li className="flex items-center">
+                      <span className="text-green-500 mr-2">✓</span>10 Reports per month
+                    </li>
+                    <li className="flex items-center">
+                      <span className="text-green-500 mr-2">✓</span>Premium templates
+                    </li>
+                    <li className="flex items-center">
+                      <span className="text-green-500 mr-2">✓</span>Advanced formatting
+                    </li>
+                    <li className="flex items-center">
+                      <span className="text-green-500 mr-2">✓</span>Priority support
+                    </li>
+                    <li className="flex items-center">
+                      <span className="text-green-500 mr-2">✓</span>Advanced citations
+                    </li>
+                    <li className="flex items-center">
+                      <span className="text-green-500 mr-2">✓</span>Multiple export formats
+                    </li>
+                    <li className="flex items-center">
+                      <span className="text-green-500 mr-2">✓</span>Plagiarism checker
+                    </li>
+                    <li className="flex items-center">
+                      <span className="text-green-500 mr-2">✓</span>Grammar assistance
+                    </li>
+                  </ul>
+                  <Button className="w-full bg-blue-600 hover:bg-blue-700">Start Free Trial</Button>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardHeader>
+                  <CardTitle className="text-2xl">Pro</CardTitle>
+                  <div className="text-4xl font-bold">
+                    $39<span className="text-lg font-normal">/per month</span>
+                  </div>
+                  <CardDescription>For students with multiple projects</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <ul className="space-y-3 mb-6">
+                    <li className="flex items-center">
+                      <span className="text-green-500 mr-2">✓</span>Unlimited reports
+                    </li>
+                    <li className="flex items-center">
+                      <span className="text-green-500 mr-2">✓</span>All premium templates
+                    </li>
+                    <li className="flex items-center">
+                      <span className="text-green-500 mr-2">✓</span>Custom formatting
+                    </li>
+                    <li className="flex items-center">
+                      <span className="text-green-500 mr-2">✓</span>24/7 priority support
+                    </li>
+                    <li className="flex items-center">
+                      <span className="text-green-500 mr-2">✓</span>Advanced citations & bibliography
+                    </li>
+                    <li className="flex items-center">
+                      <span className="text-green-500 mr-2">✓</span>All export formats
+                    </li>
+                    <li className="flex items-center">
+                      <span className="text-green-500 mr-2">✓</span>Advanced plagiarism checker
+                    </li>
+                    <li className="flex items-center">
+                      <span className="text-green-500 mr-2">✓</span>AI writing assistant
+                    </li>
+                    <li className="flex items-center">
+                      <span className="text-green-500 mr-2">✓</span>Collaboration tools
+                    </li>
+                    <li className="flex items-center">
+                      <span className="text-green-500 mr-2">✓</span>Custom branding
+                    </li>
+                  </ul>
+                  <Button className="w-full bg-transparent" variant="outline">
+                    Start Free Trial
+                  </Button>
+                </CardContent>
+              </Card>
+            </div>
+
+            {/* <div className="text-center text-gray-600">
+              <p className="mb-4">All plans include a 7-day free trial • No credit card required • Cancel anytime</p>
+              <div className="flex justify-center items-center space-x-8 text-sm">
+                <span>30-day money-back guarantee</span>
+                <span>Student discounts available</span>
+                <span>Secure payment processing</span>
+              </div>
+            </div> */}
+          </div>
+        </section>
+
+        {/* Blog Section */}
+        <SectionReveal delay={200}>
+          <section id="blog" className="py-20 bg-gradient-to-br from-gray-50 to-blue-50 relative overflow-hidden">
+            <MovingDotsBackground />
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+              <div className="text-center mb-16">
+                <h2 className="text-4xl font-bold text-gray-900 mb-4 animate-fade-in-up">Latest from Our Blog</h2>
+                {/* <p className="text-xl text-gray-600 max-w-3xl mx-auto animate-fade-in-up animate-delay-100">
+                  Stay updated with the latest tips, tricks, and insights to help you excel in your academic writing and
+                  project report creation.
+                </p> */}
+              </div>
+
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+                {blogPosts.slice(0, 6).map((post, index) => (
+                  <Card
+                    key={post.slug}
+                    className={`hover:shadow-xl transition-all duration-500 hover:-translate-y-3 bg-white/80 backdrop-blur-sm border-0 shadow-lg card-hover animate-fade-in-scale animate-delay-${(index + 1) * 100}`}
+                  >
+                    <CardHeader>
+                      <Badge variant="secondary" className="w-fit mb-2 animate-bounce-subtle">
+                        {post.category}
+                      </Badge>
+                      <CardTitle className="text-lg line-clamp-2 hover:text-blue-600 transition-colors">
+                        {post.title}
+                      </CardTitle>
+                      <CardDescription className="line-clamp-3">{post.description}</CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="flex items-center justify-between text-sm text-gray-500 mb-2">
+                        <span>{post.author}</span>
+                        <span>{post.readTime}</span>
+                      </div>
+                      <div className="text-sm text-gray-500 mb-4">{post.publishedDate}</div>
+                      <Link href={`/blog/${post.slug}`}>
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          className="hover:bg-blue-50 hover:border-blue-300 transition-all duration-300 bg-transparent btn-hover-effect"
+                        >
+                          Read More
+                        </Button>
+                      </Link>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+
+              <div className="text-center">
+                <Link href="/blog">
+                  <Button className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 btn-hover-effect rounded-xl shadow-lg hover:shadow-xl">
+                    View All Articles
+                  </Button>
+                </Link>
+              </div>
+            </div>
+          </section>
+        </SectionReveal>
+
+        {/* Contact Section */}
+        <section id="contact" className="relative py-20 bg-white overflow-hidden">
+          <MovingDotsBackground />
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-12 md:mb-16">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold font-serif text-gray-900 mb-4 px-2">
+                Get in Touch
+              </h2>
+              <p className="text-base sm:text-lg md:text-xl text-gray-600 max-w-3xl mx-auto px-4 leading-relaxed">
+                Have questions about AI Report Studio? Our team is here to help you succeed in your academic journey.
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-8 md:gap-12">
+              <div className="animate-fade-in-left">
+                <h3 className="text-xl sm:text-2xl font-bold font-serif text-gray-900 mb-6 px-2">
+                  Contact Information
+                </h3>
+                <div className="space-y-4 px-2">
+                  <div className="flex items-start space-x-4 p-4 bg-white rounded-lg shadow-sm">
+                    <div className="text-blue-600 mt-1 flex-shrink-0">📧</div>
+                    <div>
+                      <div className="font-semibold text-gray-900">Email Support</div>
+                      <div className="text-gray-600 text-sm sm:text-base">support@aireportstudio.com</div>
+                      <div className="text-gray-500 text-xs sm:text-sm">Response within 24 hours</div>
+                    </div>
+                  </div>
+                  <div className="flex items-start space-x-4 p-4 bg-white rounded-lg shadow-sm">
+                    <div className="text-blue-600 mt-1 flex-shrink-0">💬</div>
+                    <div>
+                      <div className="font-semibold text-gray-900">Chat Bot</div>
+                      <div className="text-gray-600 text-sm sm:text-base">Available 24/7</div>
+                      <div className="text-gray-500 text-xs sm:text-sm">Instant support for urgent queries</div>
+                    </div>
+                  </div>
+                  <div className="flex items-start space-x-4 p-4 bg-white rounded-lg shadow-sm">
+                    <div className="text-blue-600 mt-1 flex-shrink-0">📚</div>
+                    <div>
+                      <div className="font-semibold text-gray-900">Telegram Support</div>
+                      <div className="text-gray-600 text-sm sm:text-base">@aireportstudio</div>
+                      <div className="text-gray-500 text-xs sm:text-sm">Expert guidance for complex projects</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="animate-fade-in-right">
+                <Card className="shadow-sm">
+                  <CardHeader>
+                    <CardTitle className="text-lg sm:text-xl">Send us a Message</CardTitle>
+                    <CardDescription>We'll get back to you within 24 hours</CardDescription>
+                  </CardHeader>
+                  <CardContent className="space-y-4">
+                    <div className="grid sm:grid-cols-2 gap-4">
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">First Name</label>
+                        <input
+                          type="text"
+                          className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm sm:text-base min-h-[44px]"
+                          placeholder="John"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">Last Name</label>
+                        <input
+                          type="text"
+                          className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm sm:text-base min-h-[44px]"
+                          placeholder="Doe"
+                        />
+                      </div>
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">Email</label>
+                      <input
+                        type="email"
+                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm sm:text-base min-h-[44px]"
+                        placeholder="john.doe@university.edu"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">Subject</label>
+                      <select className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm sm:text-base min-h-[44px]">
+                        <option>General Inquiry</option>
+                        <option>Technical Support</option>
+                        <option>Academic Guidance</option>
+                        <option>Billing Question</option>
+                        <option>Feature Request</option>
+                      </select>
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">Message</label>
+                      <textarea
+                        rows={4}
+                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm sm:text-base"
+                        placeholder="Tell us how we can help you..."
+                      ></textarea>
+                    </div>
+                    <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white btn-hover-effect min-h-[44px]">
+                      Send Message
+                    </Button>
+                  </CardContent>
+                </Card>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* FAQ Section */}
+        <section id="faq" className="relative py-20 bg-gray-50 overflow-hidden">
+          <MovingDotsBackground />
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-12 md:mb-16">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold font-serif text-gray-900 mb-4 px-2">
+                Frequently Asked Questions
+              </h2>
+              <p className="text-base sm:text-lg md:text-xl text-gray-600 max-w-3xl mx-auto px-4 leading-relaxed">
+                Find answers to common questions about AI Report Studio and how it can help you create outstanding academic
+                reports.
+              </p>
+            </div>
+
+            <InteractiveFAQ />
+          </div>
+        </section>
+
+        {/* Footer */}
+      </main>
+
+      {/* Footer */}
+      <footer className="bg-gray-900 text-white py-12 md:py-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 mb-8 md:mb-12">
+            <div className="col-span-2 md:col-span-1">
+              <div className="text-xl sm:text-2xl font-bold font-serif mb-4 gradient-text-white">AI Report Studio</div>
+              <p className="text-gray-400 text-sm sm:text-base leading-relaxed mb-4">
+                AI Final Year Project Report Generator – Create professional academic reports with AI.
+              </p>
+              <div className="flex space-x-4">
+                <a href="#" className="text-gray-400 hover:text-white transition-colors">
+                  <span className="sr-only">Youtube</span><Youtube className="w-5 h-5 hover:text-red-500 transition-colors" />
+                </a>
+                <a href="#" className="text-gray-400 hover:text-white transition-colors">
+                  <span className="sr-only">Instagram</span><Instagram className="w-5 h-5 hover:text-pink-500 transition-colors" />
+                </a>
+                <a href="#" className="text-gray-400 hover:text-white transition-colors">
+                  <span className="sr-only">Email</span><Mail className="w-5 h-5 hover:text-blue-500 transition-colors" />
+                </a>
+                <a href="#" className="text-gray-400 hover:text-white transition-colors">
+                  <span className="sr-only">LinkedIn</span><Linkedin className="w-5 h-5 hover:text-blue-700 transition-colors" />
+                </a>
+              </div>
+            </div>
+
+            <div>
+              <h3 className="text-base sm:text-lg font-semibold mb-4">Product</h3>
+              <ul className="space-y-2 text-sm sm:text-base">
+                <li>
+                  <a href="#features" className="text-gray-400 hover:text-white transition-colors">
+                    Features
+                  </a>
+                </li>
+                <li>
+                  <a href="#pricing" className="text-gray-400 hover:text-white transition-colors">
+                    Pricing
+                  </a>
+                </li>
+                {/* <li>
+                  <a href="#" className="text-gray-400 hover:text-white transition-colors">
+                    Templates
+                  </a>
+                </li> */}
+                {/* <li>
+                  <a href="#" className="text-gray-400 hover:text-white transition-colors">
+                    Integrations
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="text-gray-400 hover:text-white transition-colors">
+                    API
+                  </a>
+                </li> */}
+              </ul>
+            </div>
+
+            <div>
+              <h3 className="text-base sm:text-lg font-semibold mb-4">Resources</h3>
+              <ul className="space-y-2 text-sm sm:text-base">
+                <li>
+                  <Link href="/blog" className="text-gray-400 hover:text-white transition-colors">
+                    Blog
+                  </Link>
+                </li>
+                <li>
+                  <a href="#" className="text-gray-400 hover:text-white transition-colors">
+                    Help Center
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="text-gray-400 hover:text-white transition-colors">
+                    Tutorials
+                  </a>
+                </li>
+                {/* <li>
+                  <a href="#" className="text-gray-400 hover:text-white transition-colors">
+                    Webinars
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="text-gray-400 hover:text-white transition-colors">
+                    Community
+                  </a>
+                </li> */}
+              </ul>
+            </div>
+
+            <div>
+              <h3 className="text-base sm:text-lg font-semibold mb-4">Company</h3>
+              <ul className="space-y-2 text-sm sm:text-base">
+                <li>
+                  <a href="#about" className="text-gray-400 hover:text-white transition-colors">
+                    About
+                  </a>
+                </li>
+                <li>
+                  <a href="#contact" className="text-gray-400 hover:text-white transition-colors">
+                    Contact
+                  </a>
+                </li>
+                {/* <li>
+                  <a href="#" className="text-gray-400 hover:text-white transition-colors">
+                    Careers
+                  </a>
+                </li> */}
+                <li>
+                  <a href="#" className="text-gray-400 hover:text-white transition-colors">
+                    Privacy Policy
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="text-gray-400 hover:text-white transition-colors">
+                    Terms of Service
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div className="border-t border-gray-800 pt-6 md:pt-4">
+            <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+              <div className="text-gray-400 text-sm sm:text-base text-center md:text-left">
+                © {new Date().getFullYear()} AI Report Studio. All rights reserved.
+              </div>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+  )
+}
