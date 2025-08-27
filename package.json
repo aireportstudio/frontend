@@ -3,9 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "build": "next build",
     "dev": "next dev",
-    "lint": "next lint",
+    "build": "npx @cloudflare/next-on-pages@1",
     "start": "next start"
   },
   "dependencies": {
@@ -61,6 +60,7 @@
     "zod": "3.25.67"
   },
   "devDependencies": {
+    "@cloudflare/next-on-pages": "^1.13.14",
     "@tailwindcss/postcss": "^4.1.9",
     "@types/node": "^22",
     "@types/react": "^19",
