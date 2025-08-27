@@ -1,5 +1,5 @@
-export const runtime = 'edge'
 "use client"
+export const runtime = 'edge'
 
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
