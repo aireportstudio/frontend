@@ -19,7 +19,7 @@ const poppins = Poppins({
 export const metadata: Metadata = {
   title: "AIReportStudio - AI Project Report Generator for Students",
   description:
-    "The ultimate AI-powered platform for final year students to generate well-structured, academic project reports with professional templates, citation management, and academic integrity assurance. Trusted by 10,000+ students worldwide.",
+    "AI-powered platform for final year students to create structured, plagiarism-free project reports with citations and templates.",
   keywords: [
     "AI report generator",
     "final year project",
@@ -144,7 +144,7 @@ const structuredData = {
     name: "AI Report Studio",
     logo: {
       "@type": "ImageObject",
-      url: "https://reportgenpro.com/logo.png",
+      url: "https://www.aiprojectreport.com/logo.png",
     },
   },
   featureList: [
@@ -162,7 +162,7 @@ const organizationData = {
   "@type": "Organization",
   name: "AI Report Studio",
   url: "https://reportgenpro.com",
-  logo: "https://reportgenpro.com/logo.png",
+  logo: "https://www.aiprojectreport.com/logo.png",
   description:
     "Leading AI-powered platform for academic report generation, helping students create professional project reports with ease.",
   foundingDate: "2019",

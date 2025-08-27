@@ -2,7 +2,7 @@ User-agent: *
 Allow: /
 
 # Sitemap
-Sitemap: https://reportgenpro.com/sitemap.xml
+Sitemap: https://www.aiprojectreport.com/sitemap.xml
 
 # Crawl-delay for respectful crawling
 Crawl-delay: 1
