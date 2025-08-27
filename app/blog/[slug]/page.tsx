@@ -24,7 +24,7 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
     notFound()
   }
 
-  // Get related posts (same category, excluding current post)
+  // Get related posts (same category, excluding current post) 
   const relatedPosts = blogPosts.filter((p) => p.category === post.category && p.slug !== post.slug).slice(0, 3)
 
   useEffect(() => {
