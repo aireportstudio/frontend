@@ -37,7 +37,7 @@ export const metadata: Metadata = {
     "academic success",
     "report writing software",
   ],
-  authors: [{ name: "AI Report Studio Team", url: "https://reportgenpro.com" }],
+  authors: [{ name: "AI Report Studio Team", url: "https://www.aiprojectreport.com/" }],
   creator: "AI Report Studio",
   publisher: "AI Report Studio",
   robots: {
@@ -57,7 +57,7 @@ export const metadata: Metadata = {
       "Professional AI-Powered Project Report Generation Platform for Final Year Students. Generate well-structured academic reports with professional templates and citation management.",
     type: "website",
     locale: "en_US",
-    url: "https://reportgenpro.com",
+    url: "https://www.aiprojectreport.com/",
     siteName: "AI Report Studio",
     images: [
       {
@@ -74,10 +74,10 @@ export const metadata: Metadata = {
     description:
       "Transform Ideas into Academic Excellence. Generate professional project reports with AI-powered tools.",
     images: ["/twitter-image.jpg"],
-    creator: "@reportgenpro",
+    creator: "@aiprojectreport",
   },
   alternates: {
-    canonical: "https://reportgenpro.com",
+    canonical: "https://www.aiprojectreport.com/",
   },
   category: "Education Technology",
   classification: "Academic Writing Tools",
@@ -87,13 +87,13 @@ export const metadata: Metadata = {
     address: false,
     telephone: false,
   },
-  metadataBase: new URL("https://reportgenpro.com"),
+  metadataBase: new URL("https://www.aiprojectreport.com/"),
   verification: {
     google: "your-google-verification-code",
     yandex: "your-yandex-verification-code",
     yahoo: "your-yahoo-verification-code",
   },
-    generator: 'v0.app'
+    generator: 'aiprojectreport'
 }
 
 const structuredData = {
@@ -101,7 +101,7 @@ const structuredData = {
   "@type": "SoftwareApplication",
   name: "AI Report Studio",
   description: "AI-powered platform for generating professional academic project reports for final year students",
-  url: "https://reportgenpro.com",
+  url: "https://www.aiprojectreport.com/",
   applicationCategory: "EducationalApplication",
   operatingSystem: "Web Browser",
   offers: [
@@ -137,7 +137,7 @@ const structuredData = {
   author: {
     "@type": "Organization",
     name: "AI Report Studio",
-    url: "https://reportgenpro.com",
+    url: "https://www.aiprojectreport.com/",
   },
   publisher: {
     "@type": "Organization",
@@ -161,7 +161,7 @@ const organizationData = {
   "@context": "https://schema.org",
   "@type": "Organization",
   name: "AI Report Studio",
-  url: "https://reportgenpro.com",
+  url: "https://www.aiprojectreport.com/",
   logo: "https://www.aiprojectreport.com/logo.png",
   description:
     "Leading AI-powered platform for academic report generation, helping students create professional project reports with ease.",
@@ -199,6 +199,7 @@ export default function RootLayout({
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
         <link rel="manifest" href="/site.webmanifest" />
+        <link rel="canonical" href="https://www.aiprojectreport.com" />
       </head>
       <body className="font-sans antialiased">{children}</body>
     </html>

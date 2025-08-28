@@ -20,7 +20,6 @@ export default function HomePage() {
 
   useEffect(() => {
     setIsVisible(true)
-    
   }, [])
 
   return (
