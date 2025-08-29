@@ -610,7 +610,7 @@ export default function HomePage() {
                   </p>
                   <div className="flex items-center space-x-3">
                     <img
-                      src="/young-woman-computer-science-headshot.png"
+                      src="/young-woman-computer-science-headshot.webp"
                       alt="Aditi Sharma"
                       className="w-12 h-12 rounded-full object-cover"
                     />
@@ -630,7 +630,7 @@ export default function HomePage() {
                   </p>
                   <div className="flex items-center space-x-3">
                     <img
-                      src="/young-asian-engineer-headshot.png"
+                      src="/young-asian-engineer-headshot.webp"
                       alt="Rohan Mehta"
                       className="w-12 h-12 rounded-full object-cover"
                     />
@@ -650,7 +650,7 @@ export default function HomePage() {
                   </p>
                   <div className="flex items-center space-x-3">
                     <img
-                      src="/latina-business-student-headshot.png"
+                      src="/latina-business-student-headshot.webp"
                       alt="Sneha Reddy"
                       className="w-12 h-12 rounded-full object-cover"
                     />
@@ -690,7 +690,7 @@ export default function HomePage() {
                   </p>
                   <div className="flex items-center space-x-3">
                     <img
-                      src="/young-indian-woman-psychology-student-headshot.png"
+                      src="/young-indian-woman-psychology-student-headshot.webp"
                       alt="Priya Patel"
                       className="w-12 h-12 rounded-full object-cover"
                     />
@@ -710,7 +710,7 @@ export default function HomePage() {
                   </p>
                   <div className="flex items-center space-x-3">
                     <img
-                      src="/young-engineer-headshot.png"
+                      src="/young-engineer-headshot.webp"
                       alt="Karan Malhotra"
                       className="w-12 h-12 rounded-full object-cover"
                     />
