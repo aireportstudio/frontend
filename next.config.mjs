@@ -1,4 +1,3 @@
-
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   eslint: {
@@ -7,16 +6,21 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
+
+  compress: true, // ✅ enable gzip/brotli compression
+
   images: {
-    unoptimized: false,
+    unoptimized: false, // ✅ let Next optimize images
+    formats: ["image/avif", "image/webp"], // ✅ modern formats
+    minimumCacheTTL: 31536000, // ✅ cache images for 1 year
   },
 
   async redirects() {
     return [
       {
-        source: '/:path*',
-        has: [{ type: 'host', value: 'aiprojectreport.com' }],
-        destination: 'https://www.aiprojectreport.com/:path*',
+        source: "/:path*",
+        has: [{ type: "host", value: "aiprojectreport.com" }],
+        destination: "https://www.aiprojectreport.com/:path*",
         permanent: true,
       },
     ]

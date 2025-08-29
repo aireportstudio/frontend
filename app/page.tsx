@@ -14,6 +14,7 @@ import Link from "next/link"
 import MovingDotsBackground from "@/components/moving-dots-background"
 import { blogPosts } from "@/lib/blog-data"
 import { Instagram, Youtube, Mail, Send, Linkedin } from "lucide-react"
+import Image from "next/image"
 export default function HomePage() {
   const [isVisible, setIsVisible] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
@@ -609,10 +610,12 @@ export default function HomePage() {
                     looked incredibly professional, and I got top grades!"
                   </p>
                   <div className="flex items-center space-x-3">
-                    <img
+                    <Image
                       src="/young-woman-computer-science-headshot.webp"
                       alt="Aditi Sharma"
-                      className="w-12 h-12 rounded-full object-cover"
+                      width={48}   // 👈 matches w-12 (12 * 4px = 48px)
+                      height={48}  // 👈 matches h-12 (12 * 4px = 48px)
+                      className="rounded-full object-cover"
                     />
                     <div>
                       <div className="font-semibold">Aditi Sharma</div>
@@ -629,10 +632,12 @@ export default function HomePage() {
                     our professors expect. Highly recommended!"
                   </p>
                   <div className="flex items-center space-x-3">
-                    <img
+                    <Image
                       src="/young-asian-engineer-headshot.webp"
                       alt="Rohan Mehta"
-                      className="w-12 h-12 rounded-full object-cover"
+                      width={48}   // w-12 = 48px
+                      height={48}  // h-12 = 48px
+                      className="rounded-full object-cover"
                     />
                     <div>
                       <div className="font-semibold">Rohan Mehta</div>
@@ -649,10 +654,12 @@ export default function HomePage() {
                     entire process smooth and stress-free."
                   </p>
                   <div className="flex items-center space-x-3">
-                    <img
+                    <Image
                       src="/latina-business-student-headshot.webp"
                       alt="Sneha Reddy"
-                      className="w-12 h-12 rounded-full object-cover"
+                      width={48}   // w-12 = 48px
+                      height={48}  // h-12 = 48px
+                      className="rounded-full object-cover"
                     />
                     <div>
                       <div className="font-semibold">Sneha Reddy</div>
@@ -669,10 +676,12 @@ export default function HomePage() {
                     everything according to my university's guidelines."
                   </p>
                   <div className="flex items-center space-x-3">
-                    <img
+                    <Image
                       src="/placeholder-5u68k.png"
                       alt="Arjun Verma"
-                      className="w-12 h-12 rounded-full object-cover"
+                      width={48}   // w-12 = 48px
+                      height={48}  // h-12 = 48px
+                      className="rounded-full object-cover"
                     />
                     <div>
                       <div className="font-semibold">Arjun Verma</div>
@@ -689,10 +698,12 @@ export default function HomePage() {
                     helped me create a report that exceeded expectations."
                   </p>
                   <div className="flex items-center space-x-3">
-                    <img
+                    <Image
                       src="/young-indian-woman-psychology-student-headshot.webp"
                       alt="Priya Patel"
-                      className="w-12 h-12 rounded-full object-cover"
+                      width={48}   // w-12 = 48px
+                      height={48}  // h-12 = 48px
+                      className="rounded-full object-cover"
                     />
                     <div>
                       <div className="font-semibold">Priya Patel</div>
@@ -709,10 +720,12 @@ export default function HomePage() {
                     report looked publication-ready."
                   </p>
                   <div className="flex items-center space-x-3">
-                    <img
+                    <Image
                       src="/young-engineer-headshot.webp"
                       alt="Karan Malhotra"
-                      className="w-12 h-12 rounded-full object-cover"
+                      width={48}   // w-12 = 48px
+                      height={48}  // h-12 = 48px
+                      className="rounded-full object-cover"
                     />
                     <div>
                       <div className="font-semibold">Karan Malhotra</div>
@@ -963,7 +976,11 @@ export default function HomePage() {
                     <div className="text-blue-600 mt-1 flex-shrink-0">📧</div>
                     <div>
                       <div className="font-semibold text-gray-900">Email Support</div>
-                      <div className="text-gray-600 text-sm sm:text-base">support@aireportstudio.com</div>
+                      <div className="text-gray-600 text-sm sm:text-base">
+                        <a href="mailto:support@aiprojectreport.com" className="hover:underline">
+                          support@aiprojectreport.com
+                        </a>
+                      </div>
                       <div className="text-gray-500 text-xs sm:text-sm">Response within 24 hours</div>
                     </div>
                   </div>
@@ -1084,8 +1101,12 @@ export default function HomePage() {
                 <a href="#" className="text-gray-400 hover:text-white transition-colors">
                   <span className="sr-only">Instagram</span><Instagram className="w-5 h-5 hover:text-pink-500 transition-colors" />
                 </a>
-                <a href="#" className="text-gray-400 hover:text-white transition-colors">
-                  <span className="sr-only">Email</span><Mail className="w-5 h-5 hover:text-blue-500 transition-colors" />
+                <a
+                  href="mailto:support@aiprojectreport.com"
+                  className="text-gray-400 hover:text-white transition-colors"
+                >
+                  <span className="sr-only">Email</span>
+                  <Mail className="w-5 h-5 hover:text-blue-500 transition-colors" />
                 </a>
                 <a href="#" className="text-gray-400 hover:text-white transition-colors">
                   <span className="sr-only">LinkedIn</span><Linkedin className="w-5 h-5 hover:text-blue-700 transition-colors" />
