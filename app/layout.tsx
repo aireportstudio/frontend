@@ -115,14 +115,14 @@ const structuredData = {
     {
       "@type": "Offer",
       name: "Student Plan",
-      price: "19",
+      price: "49",
       priceCurrency: "USD",
       description: "10 reports per month with premium features",
     },
     {
       "@type": "Offer",
       name: "Pro Plan",
-      price: "39",
+      price: "99",
       priceCurrency: "USD",
       description: "Unlimited reports with all features",
     },
