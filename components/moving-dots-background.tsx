@@ -14,7 +14,7 @@ interface Dot {
 export default function MovingDotsBackground() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const dotsRef = useRef<Dot[]>([])
-  const animationRef = useRef<number>()
+  const animationRef = useRef<number | null>(null)
 
   useEffect(() => {
     const canvas = canvasRef.current
@@ -33,8 +33,7 @@ export default function MovingDotsBackground() {
 
     const createDots = () => {
       const dots: Dot[] = []
-      const numDots = Math.floor((canvas.width * canvas.height) / 15000)
-
+      const numDots = Math.min(80, Math.floor((canvas.width * canvas.height) / 20000))
       for (let i = 0; i < numDots; i++) {
         dots.push({
           x: Math.random() * canvas.width,
