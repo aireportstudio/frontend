@@ -144,7 +144,7 @@ const structuredData = {
     name: "AI Report Studio",
     logo: {
       "@type": "ImageObject",
-      url: "https://www.aiprojectreport.com/logo.png",
+      url: "logo.webp",
     },
   },
   featureList: [
@@ -162,7 +162,7 @@ const organizationData = {
   "@type": "Organization",
   name: "AI Report Studio",
   url: "https://www.aiprojectreport.com/",
-  logo: "https://www.aiprojectreport.com/logo.png",
+  logo: "/logo.webp",
   description:
     "Leading AI-powered platform for academic report generation, helping students create professional project reports with ease.",
   foundingDate: "2019",
@@ -180,6 +180,60 @@ const organizationData = {
   ],
 }
 
+const breadcrumbData = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Home", item: "https://www.aiprojectreport.com/" },
+    { "@type": "ListItem", position: 2, name: "About", item: "https://www.aiprojectreport.com/#about" },
+    { "@type": "ListItem", position: 3, name: "Features", item: "https://www.aiprojectreport.com/#features" },
+    { "@type": "ListItem", position: 4, name: "Testimonials", item: "https://www.aiprojectreport.com/#testimonials" },
+    { "@type": "ListItem", position: 5, name: "Pricing", item: "https://www.aiprojectreport.com/#pricing" },
+    { "@type": "ListItem", position: 6, name: "Blog", item: "https://www.aiprojectreport.com/blog" },
+    { "@type": "ListItem", position: 7, name: "FAQ", item: "https://www.aiprojectreport.com/#faq" },
+    { "@type": "ListItem", position: 8, name: "Contact", item: "https://www.aiprojectreport.com/#contact" },
+  ],
+}
+
+const faqData = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: [
+    {
+      "@type": "Question",
+      name: "What is AI Report Studio?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "AI Report Studio is an AI-powered platform that helps students generate professional and plagiarism-free academic project reports with templates and citation support.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Is AI Report Studio free to use?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Yes, AI Report Studio offers a free plan that allows students to generate 1 report per month. Paid plans are available for more features and unlimited usage.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Can I export my report?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Yes, you can export reports in multiple formats including PDF, DOCX, and LaTeX for easy submission.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Does AI Report Studio check for plagiarism?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Yes, the platform has built-in plagiarism detection to ensure originality and academic integrity.",
+      },
+    },
+  ],
+}
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -189,18 +243,26 @@ export default function RootLayout({
     <html lang="en" className={`${inter.variable} ${poppins.variable} scroll-smooth`}>
       <head>
         {/* ✅ JSON-LD for SEO */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationData) }}
-        />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationData) }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbData) }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqData) }} />
 
         {/* ✅ Preload fonts for faster LCP */}
-        <link rel="preload" as="font" href="/_next/static/media/poppins-latin-700.woff2" type="font/woff2" crossOrigin="anonymous" />
-        <link rel="preload" as="font" href="/_next/static/media/inter-latin-400.woff2" type="font/woff2" crossOrigin="anonymous" />
+        <link
+          rel="preload"
+          as="font"
+          href="/_next/static/media/poppins-latin-700.woff2"
+          type="font/woff2"
+          crossOrigin="anonymous"
+        />
+        <link
+          rel="preload"
+          as="font"
+          href="/_next/static/media/inter-latin-400.woff2"
+          type="font/woff2"
+          crossOrigin="anonymous"
+        />
 
         {/* ✅ Theme + PWA */}
         <meta name="theme-color" content="#2563eb" />
