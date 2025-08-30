@@ -800,7 +800,7 @@ export default function HomePage() {
                 <CardHeader>
                   <CardTitle className="text-2xl">Student</CardTitle>
                   <div className="text-4xl font-bold">
-                    $19<span className="text-lg font-normal">/per month</span>
+                    $49<span className="text-lg font-normal">/per month</span>
                   </div>
                   <CardDescription>Ideal for final year students</CardDescription>
                 </CardHeader>
@@ -839,7 +839,7 @@ export default function HomePage() {
                 <CardHeader>
                   <CardTitle className="text-2xl">Pro</CardTitle>
                   <div className="text-4xl font-bold">
-                    $39<span className="text-lg font-normal">/per month</span>
+                    $99<span className="text-lg font-normal">/per month</span>
                   </div>
                   <CardDescription>For students with multiple projects</CardDescription>
                 </CardHeader>
