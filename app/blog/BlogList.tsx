@@ -29,6 +29,7 @@ interface BlogListProps {
 }
 
 export default function BlogList({ posts, categories }: BlogListProps) {
+  
   const [searchTerm, setSearchTerm] = useState("")
   const [selectedCategory, setSelectedCategory] = useState("All")
   const [isVisible, setIsVisible] = useState(false)
