@@ -11,45 +11,56 @@ interface FAQItem {
 
 const faqData: FAQItem[] = [
   {
-    question: "Is AI Report Studio suitable for all academic disciplines?",
+    question: "What is AIProjectReport.com?",
     answer:
-      "Yes! AI Report Studio is designed to work across all academic disciplines. We offer specialized templates and formatting options for Engineering, Computer Science, Business, Psychology, Medicine, and many other fields. Our AI understands the unique requirements of different academic domains.",
+      "AIProjectReport.com is an AI-powered online tool that helps students generate complete, well-structured project reports automatically. Simply enter your course, department, and project details, and our AI creates a ready-to-download professional report.",
   },
   {
-    question: "How does the AI ensure academic integrity?",
+    question: "How does the AI Project Report Generator work?",
     answer:
-      "Our AI is designed to assist with structure, formatting, and suggestions while ensuring all content remains original. We include built-in plagiarism detection, encourage proper citations, and provide tools that help you express your own ideas more clearly rather than generating content for you.",
+      "Our system uses advanced artificial intelligence to analyze your project inputs (like project title, course, and objectives) and generate detailed sections such as Introduction, Abstract, Methodology, Results, and Conclusion — all formatted according to academic standards.",
   },
   {
-    question: "Can I collaborate with my supervisor or team members?",
+    question: "Who can use AIProjectReport.com?",
     answer:
-      "Our Pro plan includes real-time collaboration features that allow you to share your reports with supervisors, advisors, or team members. They can provide comments, suggestions, and track changes, making the review process seamless and efficient.",
+      "It’s designed for college and university students across all departments — engineering, computer science, management, arts, commerce, and more.",
   },
   {
-    question: "What citation styles are supported?",
+    question: "Is AIProjectReport.com free to use?",
     answer:
-      "We support all major citation styles including APA, MLA, Chicago, Harvard, IEEE, Vancouver, and many others. Our system automatically formats your citations and bibliography according to the latest style guidelines, and you can switch between styles with just one click.",
+      "You can generate and preview reports for free. Some premium features (like plagiarism check, detailed formatting, or extra export formats) may require an upgrade.",
   },
   {
-    question: "Is there a limit to the length of reports I can create?",
+    question: "What makes AIProjectReport.com different from other report tools?",
     answer:
-      "No, there are no length restrictions on your reports. Whether you're writing a 10-page research paper or a 200-page thesis, AI Report Studio can handle projects of any size. Our system is optimized for large documents and maintains formatting consistency throughout.",
+      "Our platform creates course-specific, department-tailored reports with AI — ensuring the content matches your academic expectations and looks like a professionally written report.",
   },
   {
-    question: "Can I export my reports in different formats?",
+    question: "Can I generate a report for any course or stream?",
     answer:
-      "Yes! You can export your reports in multiple formats including PDF, Microsoft Word (.docx), LaTeX, and HTML. This ensures compatibility with your university's submission requirements and allows you to continue editing in your preferred software if needed.",
+      "Yes! Our AI supports reports for all major streams — Engineering, Computer Science, Management, Commerce, Arts, Science, and more.",
   },
   {
-    question: "What kind of support do you provide?",
+    question: "Can I generate reports for BTech, MBA, BBA, or MSc projects?",
     answer:
-      "We offer comprehensive support including 24/7 live chat, email support, video tutorials, and academic guidance from our team of experts. Pro plan users get priority support with faster response times and access to one-on-one consultations for complex projects.",
+      "Absolutely. Just select your course type and department, and our AI will adapt the report structure and language accordingly.",
   },
   {
-    question: "Is my data secure and private?",
+    question: "What if my project topic is unique or uncommon?",
     answer:
-      "Absolutely. We use enterprise-grade security measures including SSL encryption, secure cloud storage, and regular security audits. Your reports and personal information are never shared with third parties, and you maintain full ownership of your academic work.",
+      "No problem — our AI analyzes your custom topic and generates original, context-specific content that fits your project title and field of study.",
   },
+  {
+    question: "Can I edit or customize the report after generation?",
+    answer:
+      "Yes, you can review, edit, or add your own content before downloading the final version.",
+  },
+  {
+    question: "What formats can I download my report in?",
+    answer:
+      "You can download reports in PDF, DOCX, or TXT formats for easy submission and printing.",
+  },
+
 ]
 
 export function InteractiveFAQ() {
@@ -67,16 +78,14 @@ export function InteractiveFAQ() {
             <CardTitle className="text-base sm:text-lg flex items-center justify-between group">
               <span className="group-hover:text-blue-600 transition-colors duration-200">{item.question}</span>
               <ChevronDown
-                className={`h-5 w-5 text-gray-400 transition-all duration-300 group-hover:text-blue-600 ${
-                  openIndex === index ? "rotate-180" : ""
-                }`}
+                className={`h-5 w-5 text-gray-400 transition-all duration-300 group-hover:text-blue-600 ${openIndex === index ? "rotate-180" : ""
+                  }`}
               />
             </CardTitle>
           </CardHeader>
           <div
-            className={`overflow-hidden transition-all duration-300 ease-in-out ${
-              openIndex === index ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
-            }`}
+            className={`overflow-hidden transition-all duration-300 ease-in-out ${openIndex === index ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
+              }`}
           >
             <CardContent className="pt-0">
               <p className="text-gray-600 text-sm sm:text-base leading-relaxed">{item.answer}</p>

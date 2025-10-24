@@ -16,6 +16,7 @@ import { blogPosts } from "@/lib/blog-data"
 import { Instagram, Youtube, Mail, Send, Linkedin } from "lucide-react"
 import Image from "next/image"
 import { fetchThreePosts } from "@/lib/blogApi"
+import SubscriptionModal from "@/components/SubscriptionModal"
 interface Blog {
   id: number;
   slug: string;
@@ -40,6 +41,7 @@ export default function HomePage() {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState("");
   const [error, setError] = useState("");
+  const [isModalOpen, setModalOpen] = useState(false);
   useEffect(() => {
     setIsVisible(true)
     fetchThreePosts()
@@ -81,6 +83,8 @@ export default function HomePage() {
       setLoading(false);
     }
   };
+
+
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-cyan-50">
@@ -226,7 +230,7 @@ export default function HomePage() {
             <div
               className={`flex flex-col sm:flex-row justify-center items-center gap-4 mb-8 px-4 ${isVisible ? "animate-fade-in-up animate-delay-500" : "opacity-0"}`}
             >
-              <Button className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-8 py-4 text-base md:text-lg w-full sm:w-auto min-h-[48px] font-semibold btn-hover-effect rounded-xl shadow-lg hover:shadow-xl transition-all duration-300">
+              <Button onClick={() => setModalOpen(true)} className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-8 py-4 text-base md:text-lg w-full sm:w-auto min-h-[48px] font-semibold btn-hover-effect rounded-xl shadow-lg hover:shadow-xl transition-all duration-300">
                 <span className="relative z-10">Get Started Free</span>
               </Button>
               {/* <Button
@@ -863,6 +867,7 @@ export default function HomePage() {
                     Get Started Free
                   </Button>
                 </CardContent>
+                <SubscriptionModal isOpen={isModalOpen} onClose={() => setModalOpen(false)} />
               </Card>
 
               <Card className="border-blue-500 border-2 relative">
