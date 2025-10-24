@@ -74,7 +74,7 @@
 //     </>
 //   )
 // }
-
+export const dynamic = "force-dynamic";
 import type { Metadata } from "next"
 import Script from "next/script"
 import BlogList from "./BlogList"

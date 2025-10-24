@@ -68,7 +68,9 @@ const API_URL = "https://api.aiprojectreport.com/blogs"
 
 // Fetch all blog posts
 export async function fetchAllPosts(): Promise<BlogPost[]> {
-  const res = await fetch(API_URL)
+  const res = await fetch(API_URL, {
+    cache: "no-store", // 👈 ensures no static caching
+  })
   if (!res.ok) {
     throw new Error("Failed to fetch blog posts")
   }
@@ -122,7 +124,7 @@ export async function fetchBlogBySlug(slug: string): Promise<BlogPost | null> {
   }
 
   const data = await res.json();
-  
+
   const post = Array.isArray(data) ? data[0] : data; // handle if array or single object
 
   return {
