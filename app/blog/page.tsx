@@ -75,7 +75,6 @@
 //   )
 // }
 
-export const runtime = 'edge';
 import type { Metadata } from "next"
 import Script from "next/script"
 import BlogList from "./BlogList"
