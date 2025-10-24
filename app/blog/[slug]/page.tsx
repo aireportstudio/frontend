@@ -1,369 +1,525 @@
-"use client"
-export const runtime = 'edge'
+// // app/blog/[slug]/page.tsx
+// export const runtime = 'edge'
+// import { notFound } from "next/navigation"
+// import Link from "next/link"
+// import Image from "next/image"
+// import { Button } from "@/components/ui/button"
+// import { Badge } from "@/components/ui/badge"
+// import { getBlogPost, blogPosts } from "@/lib/blog-data"
+// import { Clock, User, Calendar, BookOpen } from "lucide-react"
+// import BackButton from "../[slug]/BackButton" // client component
+// import ShareButton from "../[slug]/ShareButton" // client component
+// import Header from "./Header"
 
+// // ---------- SEO Metadata ----------
+// export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+//   const { slug } = await params
+//   const post = getBlogPost(slug)
+//   if (!post) return {}
+
+//   return {
+//     title: `${post.title} | AI Report Studio`,
+//     description: post.description,
+//     keywords: post.tags?.join(", "),
+//     authors: [{ name: post.author }],
+//     openGraph: {
+//       title: post.title,
+//       description: post.description,
+//       type: "article",
+//       url: `https://yourdomain.com/blog/${post.slug}`,
+//       images: post.image ? [{ url: post.image }] : [],
+//     },
+//     twitter: {
+//       card: "summary_large_image",
+//       title: post.title,
+//       description: post.description,
+//       images: post.image ? [post.image] : [],
+//     },
+//     alternates: { canonical: `https://yourdomain.com/blog/${post.slug}` },
+//     robots: { index: true, follow: true, maxSnippet: -1, maxImagePreview: "large", maxVideoPreview: -1 },
+//   }
+// }
+
+// // ---------- Main Page ----------
+// export default async function BlogPostPage({
+//   params,
+// }: {
+//   params: Promise<{ slug: string }>
+// }) {
+//   const { slug } = await params
+//   const post = getBlogPost(slug)
+//   if (!post) notFound()
+
+//   const relatedPosts = blogPosts
+//     .filter((p) => p.category === post.category && p.slug !== post.slug)
+//     .slice(0, 3)
+
+//   // Example FAQ - ideally, you'd fetch/store FAQs per post
+//   const faqs = [
+//     { question: "What is AI Report Studio?", answer: "AI Report Studio is a platform for AI-generated insights and blogs." },
+//     { question: "Can I share this blog?", answer: "Yes, you can use the share button to share on social media." },
+//   ]
+
+//   const formatContent = (content: string) => {
+//     return content.split("\n").map((line, index) => {
+//       if (line.startsWith("# ")) {
+//         return <h1 key={index} className="text-3xl md:text-4xl font-bold font-serif text-gray-900 mb-6 mt-8">{line.substring(2)}</h1>
+//       } else if (line.startsWith("## ")) {
+//         return <h2 key={index} className="text-2xl md:text-3xl font-bold font-serif text-gray-900 mb-4 mt-8">{line.substring(3)}</h2>
+//       } else if (line.startsWith("### ")) {
+//         return <h3 key={index} className="text-xl md:text-2xl font-bold font-serif text-gray-900 mb-3 mt-6">{line.substring(4)}</h3>
+//       } else if (line.startsWith("- ")) {
+//         return <li key={index} className="text-gray-700 mb-2">{line.substring(2)}</li>
+//       } else {
+//         return <p key={index} className="text-gray-700 mb-4 leading-relaxed">{line}</p>
+//       }
+//     })
+//   }
+
+//   return (
+//     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-cyan-50">
+
+
+//       {/* Header */}
+//       <Header />
+
+//             {/* Breadcrumbs */}
+//       <nav className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-2 text-sm text-gray-600" aria-label="Breadcrumb">
+//         <ol className="list-none p-0 inline-flex space-x-2">
+//           <li><Link href="/" className="hover:underline">Home</Link></li>
+//           <li>&gt;</li>
+//           <li><Link href="/blog" className="hover:underline">Blog</Link></li>
+//           <li>&gt;</li>
+//           <li aria-current="page">{post.title}</li>
+//         </ol>
+//       </nav>
+
+//       {/* Back to Blog */}
+//       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-8">
+//         <BackButton />
+//       </div>
+
+//       {/* Article */}
+//       <article className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pb-20" itemScope itemType="https://schema.org/BlogPosting">
+//         <header className="mb-12">
+//           <div className="flex items-center gap-2 mb-4">
+//             <Badge variant="secondary">{post.category}</Badge>
+//             {post.featured && <Badge className="bg-blue-500">Featured</Badge>}
+//           </div>
+
+//           <h1 itemProp="headline" className="hero-responsive font-bold font-serif text-gray-900 leading-tight mb-6">
+//             {post.title}
+//           </h1>
+//           <p itemProp="description" className="text-xl text-gray-600 mb-8 leading-relaxed">{post.description}</p>
+
+//           {post.image && (
+//             <Image
+//               src={post.image}
+//               alt={post.title}
+//               width={800}
+//               height={450}
+//               className="rounded-lg shadow mb-8"
+//               priority
+//               itemProp="image"
+//               loading="lazy"
+//             />
+//           )}
+
+//           <div className="flex flex-wrap items-center gap-6 text-gray-600 mb-8">
+//             <div className="flex items-center gap-2"><User className="w-4 h-4" /><span itemProp="author">{post.author}</span></div>
+//             <div className="flex items-center gap-2"><Calendar className="w-4 h-4" /><time itemProp="datePublished">{post.publishedDate}</time></div>
+//             <div className="flex items-center gap-2"><Clock className="w-4 h-4" /><span>{post.readTime}</span></div>
+//             <ShareButton />
+//           </div>
+//         </header>
+
+//         <div className="prose prose-lg max-w-none bg-white rounded-lg p-8 shadow-sm" itemProp="articleBody">
+//           {formatContent(post.content)}
+//         </div>
+
+//         {/* FAQ Section */}
+//         <section className="mt-16">
+//           <h2 className="text-2xl font-bold mb-6">Frequently Asked Questions</h2>
+//           <dl className="space-y-6">
+//             {faqs.map((faq: any, i: any) => (
+//               <div key={i} className="bg-gray-50 p-4 rounded-lg shadow-sm">
+//                 <dt className="font-semibold text-gray-900">{faq.question}</dt>
+//                 <dd className="text-gray-700 mt-2">{faq.answer}</dd>
+//               </div>
+//             ))}
+//           </dl>
+//         </section>
+
+//         <footer className="mt-12 pt-8 border-t border-gray-200">
+//           <p className="text-sm text-gray-600">
+//             Written by <span itemProp="author" className="font-medium">{post.author}</span>
+//           </p>
+//         </footer>
+//       </article>
+
+//       {/* Related Posts */}
+//       {relatedPosts.length > 0 && (
+//         <section className="py-20 bg-white">
+//           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+//             <h2 className="text-2xl font-bold mb-6">Related Articles</h2>
+//             <div className="grid md:grid-cols-3 gap-8">
+//               {relatedPosts.map((relatedPost) => (
+//                 <article key={relatedPost.slug} className="bg-white rounded-lg p-6 shadow-sm" itemScope itemType="https://schema.org/BlogPosting">
+//                   <Badge variant="secondary" className="mb-3">{relatedPost.category}</Badge>
+//                   <h3 className="text-lg font-bold mb-3" itemProp="headline">{relatedPost.title}</h3>
+//                   <p className="text-gray-600 mb-4" itemProp="description">{relatedPost.description}</p>
+//                   <Link href={`/blog/${relatedPost.slug}`}>
+//                     <Button variant="outline" size="sm">
+//                       <BookOpen className="w-4 h-4 mr-2" /> Read full article
+//                     </Button>
+//                   </Link>
+//                 </article>
+//               ))}
+//             </div>
+//           </div>
+//         </section>
+//       )}
+
+//       {/* ---------- JSON-LD Structured Data ---------- */}
+//       <script
+//         type="application/ld+json"
+//         dangerouslySetInnerHTML={{
+//           __html: JSON.stringify({
+//             "@context": "https://schema.org",
+//             "@type": "BlogPosting",
+//             headline: post.title,
+//             description: post.description,
+//             image: post.image
+//               ? {
+//                   "@type": "ImageObject",
+//                   url: post.image,
+//                   width: 800,
+//                   height: 450,
+//                 }
+//               : undefined,
+//             author: { "@type": "Person", name: post.author },
+//             publisher: {
+//               "@type": "Organization",
+//               name: "AI Report Studio",
+//               logo: {
+//                 "@type": "ImageObject",
+//                 url: "https://yourdomain.com/logo.png", // replace with your logo
+//               },
+//             },
+//             keywords: post.tags?.join(", "),
+//             url: `https://yourdomain.com/blog/${post.slug}`,
+//             datePublished: post.publishedDate,
+//             dateModified: post.publishedDate,
+//             mainEntityOfPage: {
+//               "@type": "WebPage",
+//               "@id": `https://yourdomain.com/blog/${post.slug}`,
+//             },
+//           }),
+//         }}
+//       />
+
+//       {/* ---------- FAQ JSON-LD ---------- */}
+//       <script
+//         type="application/ld+json"
+//         dangerouslySetInnerHTML={{
+//           __html: JSON.stringify({
+//             "@context": "https://schema.org",
+//             "@type": "FAQPage",
+//             mainEntity: faqs.map((faq: any) => ({
+//               "@type": "Question",
+//               name: faq.question,
+//               acceptedAnswer: {
+//                 "@type": "Answer",
+//                 text: faq.answer,
+//               },
+//             })),
+//           }),
+//         }}
+//       />
+
+//       {/* ---------- Breadcrumb JSON-LD ---------- */}
+//       <script
+//         type="application/ld+json"
+//         dangerouslySetInnerHTML={{
+//           __html: JSON.stringify({
+//             "@context": "https://schema.org",
+//             "@type": "BreadcrumbList",
+//             itemListElement: [
+//               {
+//                 "@type": "ListItem",
+//                 position: 1,
+//                 name: "Home",
+//                 item: "https://yourdomain.com/",
+//               },
+//               {
+//                 "@type": "ListItem",
+//                 position: 2,
+//                 name: "Blog",
+//                 item: "https://yourdomain.com/blog",
+//               },
+//               {
+//                 "@type": "ListItem",
+//                 position: 3,
+//                 name: post.title,
+//                 item: `https://yourdomain.com/blog/${post.slug}`,
+//               },
+//             ],
+//           }),
+//         }}
+//       />
+//     </div>
+//   )
+// }
+
+export const runtime = "edge"
+import { Metadata } from "next"
+import { notFound } from "next/navigation"
+import Link from "next/link"
+import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import { getBlogPost, blogPosts } from "@/lib/blog-data"
-import Link from "next/link"
-import { notFound } from "next/navigation"
-import { useState, useEffect, use } from "react"
-import { ArrowLeft, Clock, User, Calendar, Share2, BookOpen } from "lucide-react"
+import { Clock, User, Calendar, BookOpen } from "lucide-react"
+import BackButton from "../[slug]/BackButton"
+import ShareButton from "../[slug]/ShareButton"
+import Header from "./Header"
+import { fetchBlogBySlug, fetchAllPosts } from "@/lib/blogApi"
 
-interface BlogPostPageProps {
-  params: Promise<{
-    slug: string
-  }>
+// ---------- SEO Metadata ----------
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params
+  const post = await fetchBlogBySlug(slug)
+  if (!post) return {}
+
+  return {
+    title: `${post.title} | AI Report Studio`,
+    description: post.description,
+    keywords: post.tags?.join(", "),
+    authors: [{ name: post.author }],
+    openGraph: {
+      title: post.title,
+      description: post.description,
+      type: "article",
+      url: `https://yourdomain.com/blog/${post.slug}`,
+      images: post.image ? [{ url: post.image }] : [],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: post.title,
+      description: post.description,
+      images: post.image ? [post.image] : [],
+    },
+    alternates: { canonical: `https://yourdomain.com/blog/${post.slug}` },
+  }
 }
 
-export default function BlogPostPage({ params }: BlogPostPageProps) {
-  const { slug } = use(params)
-  const [isVisible, setIsVisible] = useState(false)
-  const post = getBlogPost(slug)
+// ---------- Main Page ----------
+export default async function BlogPostPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params
+  const post = await fetchBlogBySlug(slug)
+  if (!post) notFound()
 
-  if (!post) {
-    notFound()
-  }
+  const allPosts = await fetchAllPosts()
+  const relatedPosts = allPosts
+    .filter((p) => p.category === post.category && p.slug !== post.slug)
+    .slice(0, 3)
 
-  // Get related posts (same category, excluding current post) 
-  const relatedPosts = blogPosts.filter((p) => p.category === post.category && p.slug !== post.slug).slice(0, 3)
+  const faqs = [
+    { question: "What is AI Report Studio?", answer: "AI Report Studio is a platform for AI-generated insights and blogs." },
+    { question: "Can I share this blog?", answer: "Yes, you can use the share button to share on social media." },
+  ]
 
-  useEffect(() => {
-    setIsVisible(true)
-  }, [])
-
-  // Convert markdown-style content to JSX
-  const formatContent = (content: string) => {
-    return content.split("\n").map((line, index) => {
-      if (line.startsWith("# ")) {
-        return (
-          <h1 key={index} className="text-3xl md:text-4xl font-bold font-serif text-gray-900 mb-6 mt-8">
-            {line.substring(2)}
-          </h1>
-        )
-      } else if (line.startsWith("## ")) {
-        return (
-          <h2 key={index} className="text-2xl md:text-3xl font-bold font-serif text-gray-900 mb-4 mt-8">
-            {line.substring(3)}
-          </h2>
-        )
-      } else if (line.startsWith("### ")) {
-        return (
-          <h3 key={index} className="text-xl md:text-2xl font-bold font-serif text-gray-900 mb-3 mt-6">
-            {line.substring(4)}
-          </h3>
-        )
-      } else if (line.startsWith("#### ")) {
-        return (
-          <h4 key={index} className="text-lg md:text-xl font-bold font-serif text-gray-900 mb-3 mt-4">
-            {line.substring(5)}
-          </h4>
-        )
-      } else if (line.startsWith("- ")) {
-        return (
-          <li key={index} className="text-gray-700 mb-2">
-            {line.substring(2)}
-          </li>
-        )
-      } else if (line.startsWith("**") && line.endsWith("**")) {
-        return (
-          <p key={index} className="font-bold text-gray-900 mb-4">
-            {line.substring(2, line.length - 2)}
-          </p>
-        )
-      } else if (line.trim() === "") {
-        return <br key={index} />
-      } else if (line.startsWith("```")) {
-        return null // Skip code block markers for now
-      } else {
-        return (
-          <p key={index} className="text-gray-700 mb-4 leading-relaxed">
-            {line}
-          </p>
-        )
-      }
+  const formatContent = (content: string) =>
+    content.split("\n").map((line, index) => {
+      if (line.startsWith("# ")) return <h1 key={index} className="text-3xl md:text-4xl font-bold font-serif text-gray-900 mb-6 mt-8">{line.substring(2)}</h1>
+      if (line.startsWith("## ")) return <h2 key={index} className="text-2xl md:text-3xl font-bold font-serif text-gray-900 mb-4 mt-8">{line.substring(3)}</h2>
+      if (line.startsWith("### ")) return <h3 key={index} className="text-xl md:text-2xl font-bold font-serif text-gray-900 mb-3 mt-6">{line.substring(4)}</h3>
+      if (line.startsWith("- ")) return <li key={index} className="text-gray-700 mb-2">{line.substring(2)}</li>
+      return <p key={index} className="text-gray-700 mb-4 leading-relaxed">{line}</p>
     })
-  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-cyan-50">
-      {/* Navigation Header */}
-      <header className="w-full bg-white/80 backdrop-blur-md shadow-sm sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
-            <div className="flex items-center">
-              <Link href="/" className="text-xl font-bold font-serif gradient-text">
-                AI Report Studio
-              </Link>
-            </div>
+      <Header />
 
-            <nav className="hidden md:flex items-center space-x-8">
-              <Link href="/" className="text-gray-700 hover:text-blue-600 font-medium transition-colors">
-                Home
-              </Link>
-              <Link href="/#about" className="text-gray-700 hover:text-blue-600 font-medium transition-colors">
-                About
-              </Link>
-              <Link href="/#features" className="text-gray-700 hover:text-blue-600 font-medium transition-colors">
-                Features
-              </Link>
-              <Link href="/#testimonials" className="text-gray-700 hover:text-blue-600 font-medium transition-colors">
-                Testimonials
-              </Link>
-              <Link href="/#pricing" className="text-gray-700 hover:text-blue-600 font-medium transition-colors">
-                Pricing
-              </Link>
-              <Link href="/blog" className="text-blue-600 font-medium">
-                Blog
-              </Link>
-              <Link href="/#faq" className="text-gray-700 hover:text-blue-600 font-medium transition-colors">
-                FAQ
-              </Link>
-              <Link href="/#contact" className="text-gray-700 hover:text-blue-600 font-medium transition-colors">
-                Contact
-              </Link>
-            </nav>
+      {/* Breadcrumbs */}
+      <nav className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-2 text-sm text-gray-600" aria-label="Breadcrumb">
+        <ol className="list-none p-0 inline-flex space-x-2">
+          <li><Link href="/" className="hover:underline">Home</Link></li>
+          <li>&gt;</li>
+          <li><Link href="/blog" className="hover:underline">Blog</Link></li>
+          <li>&gt;</li>
+          <li aria-current="page">{post.title}</li>
+        </ol>
+      </nav>
 
-            <div className="flex items-center">
-              <Button variant="ghost" className="md:hidden">
-                Menu
-              </Button>
-            </div>
-          </div>
-        </div>
-      </header>
-
-      {/* Back to Blog */}
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-8">
-        <Link href="/blog">
-          <Button
-            variant="ghost"
-            className={`mb-6 btn-hover-effect ${isVisible ? "animate-fade-in-left" : "opacity-0"}`}
-          >
-            <ArrowLeft className="w-4 h-4 mr-2" />
-            Back to Blog
-          </Button>
-        </Link>
+        <BackButton />
       </div>
 
-      {/* Article Header */}
-      <article className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
+      {/* Article */}
+      <article className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pb-20" itemScope itemType="https://schema.org/BlogPosting">
         <header className="mb-12">
-          <div className={`mb-6 ${isVisible ? "animate-fade-in-up" : "opacity-0"}`}>
-            <Badge variant="secondary" className="mb-4">
-              {post.category}
-            </Badge>
-            {post.featured && <Badge className="bg-blue-500 ml-2">Featured</Badge>}
+          <div className="flex items-center gap-2 mb-4">
+            <Badge variant="secondary">{post.category}</Badge>
+            {post.featured && <Badge className="bg-blue-500">Featured</Badge>}
           </div>
 
-          <h1
-            className={`hero-responsive font-bold font-serif text-gray-900 leading-tight mb-6 ${isVisible ? "animate-fade-in-up animate-delay-100" : "opacity-0"}`}
-          >
+          <h1 itemProp="headline" className="hero-responsive font-bold font-serif text-gray-900 leading-tight mb-6">
             {post.title}
           </h1>
+          <p itemProp="description" className="text-xl text-gray-600 mb-8 leading-relaxed">{post.description}</p>
 
-          <p
-            className={`text-xl text-gray-600 mb-8 leading-relaxed ${isVisible ? "animate-fade-in-up animate-delay-200" : "opacity-0"}`}
-          >
-            {post.description}
-          </p>
+          {post.image && (
+            <Image
+              src={post.image}
+              alt={post.title}
+              width={800}
+              height={450}
+              className="rounded-lg shadow mb-8"
+              priority
+              itemProp="image"
+            />
+          )}
 
-          {/* Article Meta */}
-          <div
-            className={`flex flex-wrap items-center gap-6 text-gray-600 mb-8 ${isVisible ? "animate-fade-in-up animate-delay-300" : "opacity-0"}`}
-          >
-            <div className="flex items-center gap-2">
-              <User className="w-4 h-4" />
-              <span className="font-medium">{post.author}</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <Calendar className="w-4 h-4" />
-              <span>{post.publishedDate}</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <Clock className="w-4 h-4" />
-              <span>{post.readTime}</span>
-            </div>
-            <Button variant="ghost" size="sm" className="btn-hover-effect">
-              <Share2 className="w-4 h-4 mr-2" />
-              Share
-            </Button>
-          </div>
-
-          <div
-            className={`text-sm text-gray-600 mb-8 ${isVisible ? "animate-fade-in-up animate-delay-400" : "opacity-0"}`}
-          >
-            <span className="font-medium">{post.authorRole}</span>
-          </div>
-
-          {/* Tags */}
-          <div
-            className={`flex flex-wrap gap-2 mb-8 ${isVisible ? "animate-fade-in-up animate-delay-500" : "opacity-0"}`}
-          >
-            {post.tags.map((tag) => (
-              <Badge key={tag} variant="outline" className="text-sm">
-                {tag}
-              </Badge>
-            ))}
+          <div className="flex flex-wrap items-center gap-6 text-gray-600 mb-8">
+            <div className="flex items-center gap-2"><User className="w-4 h-4" /><span itemProp="author">{post.author}</span></div>
+            <div className="flex items-center gap-2"><Calendar className="w-4 h-4" /><time itemProp="datePublished">{post.publishedDate}</time></div>
+            <div className="flex items-center gap-2"><Clock className="w-4 h-4" /><span>{post.readTime} mins</span></div>
+            <ShareButton />
           </div>
         </header>
 
-        {/* Article Content */}
-        <div
-          className={`prose prose-lg max-w-none ${isVisible ? "animate-fade-in-up animate-delay-600" : "opacity-0"}`}
-        >
-          <div className="bg-white rounded-lg p-8 shadow-sm">{formatContent(post.content)}</div>
-        </div>
+        {/* <div className="prose prose-lg max-w-none bg-white rounded-lg p-8 shadow-sm" itemProp="articleBody">
+          {formatContent(post.content)}
+        </div> */}
 
-        {/* Article Footer */}
+        <div
+          className="prose prose-lg max-w-none bg-white rounded-lg p-8 shadow-sm"
+          itemProp="articleBody"
+          dangerouslySetInnerHTML={{ __html: post.content }}
+        />
+
+        {/* FAQ Section */}
+        <section className="mt-16">
+          <h2 className="text-2xl font-bold mb-6">Frequently Asked Questions</h2>
+          <dl className="space-y-6">
+            {faqs.map((faq, i) => (
+              <div key={i} className="bg-gray-50 p-4 rounded-lg shadow-sm">
+                <dt className="font-semibold text-gray-900">{faq.question}</dt>
+                <dd className="text-gray-700 mt-2">{faq.answer}</dd>
+              </div>
+            ))}
+          </dl>
+        </section>
+
         <footer className="mt-12 pt-8 border-t border-gray-200">
-          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-            <div>
-              <p className="text-sm text-gray-600">
-                Written by <span className="font-medium text-gray-900">{post.author}</span>
-              </p>
-              <p className="text-sm text-gray-500">{post.authorRole}</p>
-            </div>
-            <Button variant="outline" className="btn-hover-effect bg-transparent">
-              <Share2 className="w-4 h-4 mr-2" />
-              Share Article
-            </Button>
-          </div>
+          <p className="text-sm text-gray-600">
+            Written by <span itemProp="author" className="font-medium">{post.author}</span>
+          </p>
         </footer>
       </article>
 
-      {/* Related Articles */}
+      {/* Related Posts */}
       {relatedPosts.length > 0 && (
         <section className="py-20 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-12">
-              <h2 className="heading-responsive font-bold font-serif text-gray-900 mb-4">Related Articles</h2>
-              <p className="text-responsive text-gray-600">Continue reading with these related articles</p>
-            </div>
-
+            <h2 className="text-2xl font-bold mb-6">Related Articles</h2>
             <div className="grid md:grid-cols-3 gap-8">
-              {relatedPosts.map((relatedPost, index) => (
-                <div
-                  key={relatedPost.slug}
-                  className={`card-hover ${isVisible ? "animate-fade-in-up" : "opacity-0"}`}
-                  style={{ animationDelay: `${index * 100 + 700}ms` }}
-                >
-                  <div className="bg-white rounded-lg p-6 shadow-sm h-full flex flex-col">
-                    <Badge variant="secondary" className="w-fit mb-3">
-                      {relatedPost.category}
-                    </Badge>
-                    <h3 className="text-lg font-bold font-serif text-gray-900 mb-3 line-clamp-2">
-                      {relatedPost.title}
-                    </h3>
-                    <p className="text-gray-600 mb-4 line-clamp-3 flex-grow">{relatedPost.description}</p>
-                    <div className="flex items-center justify-between text-sm text-gray-500 mb-4">
-                      <span>{relatedPost.author}</span>
-                      <span>{relatedPost.readTime}</span>
-                    </div>
-                    <Link href={`/blog/${relatedPost.slug}`}>
-                      <Button variant="outline" size="sm" className="w-full btn-hover-effect bg-transparent">
-                        <BookOpen className="w-4 h-4 mr-2" />
-                        Read Article
-                      </Button>
-                    </Link>
-                  </div>
-                </div>
+              {relatedPosts.map((relatedPost) => (
+                <article key={relatedPost.slug} className="bg-white rounded-lg p-6 shadow-sm" itemScope itemType="https://schema.org/BlogPosting">
+                  <Badge variant="secondary" className="mb-3">{relatedPost.category}</Badge>
+                  <h3 className="text-lg font-bold mb-3" itemProp="headline">{relatedPost.title}</h3>
+                  <p className="text-gray-600 mb-4" itemProp="description">{relatedPost.description}</p>
+                  <Link href={`/blog/${relatedPost.slug}`}>
+                    <Button variant="outline" size="sm">
+                      <BookOpen className="w-4 h-4 mr-2" /> Read full article
+                    </Button>
+                  </Link>
+                </article>
               ))}
             </div>
           </div>
         </section>
       )}
 
-      {/* Footer */}
-      <footer className="bg-gray-900 text-white py-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-4 gap-8 mb-8">
-            <div>
-              <div className="text-xl font-bold text-blue-400 mb-4">AI Report Studio</div>
-              <p className="text-gray-400 text-sm">
-                Professional AI-Powered Project Report Generation Platform for Final Year Students
-              </p>
-            </div>
-            <div>
-              <h4 className="font-semibold mb-4">Product</h4>
-              <ul className="space-y-2 text-sm text-gray-400">
-                <li>
-                  <Link href="/#features" className="hover:text-white transition-colors">
-                    Features
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/#pricing" className="hover:text-white transition-colors">
-                    Pricing
-                  </Link>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-white transition-colors">
-                    Templates
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-white transition-colors">
-                    Integrations
-                  </a>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-semibold mb-4">Support</h4>
-              <ul className="space-y-2 text-sm text-gray-400">
-                <li>
-                  <Link href="/#contact" className="hover:text-white transition-colors">
-                    Contact Us
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/#faq" className="hover:text-white transition-colors">
-                    FAQ
-                  </Link>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-white transition-colors">
-                    Help Center
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-white transition-colors">
-                    Community
-                  </a>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-semibold mb-4">Company</h4>
-              <ul className="space-y-2 text-sm text-gray-400">
-                <li>
-                  <Link href="/#about" className="hover:text-white transition-colors">
-                    About
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/blog" className="hover:text-white transition-colors">
-                    Blog
-                  </Link>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-white transition-colors">
-                    Privacy Policy
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-white transition-colors">
-                    Terms of Service
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </div>
-          {/* <div className="border-t border-gray-800 pt-8 text-center text-sm text-gray-400">
-            <p>Built with v0</p>
-          </div> */}
-        </div>
-      </footer>
+      {/* ---------- JSON-LD scripts remain unchanged ---------- */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BlogPosting",
+            headline: post.title,
+            description: post.description,
+            image: post.image ? { "@type": "ImageObject", url: post.image, width: 800, height: 450 } : undefined,
+            author: { "@type": "Person", name: post.author },
+            publisher: { "@type": "Organization", name: "AI Report Studio" },
+            keywords: post.tags?.join(", "),
+            url: `https://yourdomain.com/blog/${post.slug}`,
+            datePublished: post.publishedDate,
+          }),
+        }}
+      />
+
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            mainEntity: faqs.map((faq) => ({
+              "@type": "Question",
+              name: faq.question,
+              acceptedAnswer: { "@type": "Answer", text: faq.answer },
+            })),
+          }),
+        }}
+      />
+
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            itemListElement: [
+              { "@type": "ListItem", position: 1, name: "Home", item: "https://yourdomain.com/" },
+              { "@type": "ListItem", position: 2, name: "Blog", item: "https://yourdomain.com/blog" },
+              { "@type": "ListItem", position: 3, name: post.title, item: `https://yourdomain.com/blog/${post.slug}` },
+            ],
+          }),
+        }}
+      />
+      {/* ---------- Breadcrumb JSON-LD ---------- */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            itemListElement: [
+              {
+                "@type": "ListItem",
+                position: 1,
+                name: "Home",
+                item: "https://yourdomain.com/",
+              },
+              {
+                "@type": "ListItem",
+                position: 2,
+                name: "Blog",
+                item: "https://yourdomain.com/blog",
+              },
+              {
+                "@type": "ListItem",
+                position: 3,
+                name: post.title,
+                item: `https://yourdomain.com/blog/${post.slug}`,
+              },
+            ],
+          }),
+        }}
+      />
     </div>
   )
 }

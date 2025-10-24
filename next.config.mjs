@@ -9,10 +9,21 @@ const nextConfig = {
 
   compress: true, // ✅ enable gzip/brotli compression
 
-  images: {
+images: {
     unoptimized: false, // ✅ let Next optimize images
     formats: ["image/avif", "image/webp"], // ✅ modern formats
     minimumCacheTTL: 31536000, // ✅ cache images for 1 year
+
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "api.aiprojectreport.com",
+      },
+      {
+        protocol: "https",
+        hostname: "www.api.aiprojectreport.com",
+      },
+    ],
   },
 
   async redirects() {

@@ -15,13 +15,72 @@ import MovingDotsBackground from "@/components/moving-dots-background"
 import { blogPosts } from "@/lib/blog-data"
 import { Instagram, Youtube, Mail, Send, Linkedin } from "lucide-react"
 import Image from "next/image"
+import { fetchThreePosts } from "@/lib/blogApi"
+interface Blog {
+  id: number;
+  slug: string;
+  title: string;
+  description: string;
+  author: string;
+  category: string;
+  featured: boolean;
+  image: string;
+  publishedDate: string;
+  readTime: string;
+}
 export default function HomePage() {
   const [isVisible, setIsVisible] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-
+  const [data, setData] = useState<Blog[]>([])
+  const [fname, setFname] = useState("");
+  const [lname, setLname] = useState("");
+  const [email, setEmail] = useState("");
+  const [subject, setSubject] = useState("General Inquiry");
+  const [message, setMessage] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState("");
+  const [error, setError] = useState("");
   useEffect(() => {
     setIsVisible(true)
+    fetchThreePosts()
+      .then((fetchData: any) => {
+        setData(fetchData)
+      })
+      .catch((error) => {
+        console.error("Error fetching posts:", error);
+      });
+
   }, [])
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    setSuccess("");
+    setError("");
+
+    try {
+      const res = await fetch("https://api.aiprojectreport.com/contacts/create", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ fname, lname, email, subject, message }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) throw new Error(data.error || "Something went wrong");
+
+      setSuccess("Message sent successfully!");
+      setFname("");
+      setLname("");
+      setEmail("");
+      setSubject("General Inquiry");
+      setMessage("");
+    } catch (err: any) {
+      setError(err.message || "Failed to send message");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-cyan-50">
@@ -107,7 +166,7 @@ export default function HomePage() {
               className={`inline-flex items-center bg-blue-100/80 backdrop-blur-sm text-blue-800 px-4 py-2 rounded-full text-sm font-medium mb-8 animate-bounce-subtle ${isVisible ? "animate-fade-in-scale" : "opacity-0"}`}
             >
               <span className="mr-2 text-green-600">✓</span>
-              Trusted by 5,000+ Students
+              Trusted by 999+ Students
             </div>
 
             <h1
@@ -140,7 +199,7 @@ export default function HomePage() {
             >
               <div className="text-center bg-white/60 backdrop-blur-sm rounded-xl p-6 card-hover animate-float-slow shadow-lg border border-white/20">
                 <AnimatedCounter
-                  end={5000}
+                  end={2999}
                   suffix="+"
                   className="text-2xl sm:text-3xl md:text-4xl font-bold text-blue-600 mb-2"
                 />
@@ -148,7 +207,7 @@ export default function HomePage() {
               </div>
               <div className="text-center bg-white/60 backdrop-blur-sm rounded-xl p-6 card-hover animate-float-medium animate-delay-500 shadow-lg border border-white/20">
                 <AnimatedCounter
-                  end={1000}
+                  end={999}
                   suffix="+"
                   className="text-2xl sm:text-3xl md:text-4xl font-bold text-blue-600 mb-2"
                 />
@@ -170,11 +229,26 @@ export default function HomePage() {
               <Button className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-8 py-4 text-base md:text-lg w-full sm:w-auto min-h-[48px] font-semibold btn-hover-effect rounded-xl shadow-lg hover:shadow-xl transition-all duration-300">
                 <span className="relative z-10">Get Started Free</span>
               </Button>
-              <Button
+              {/* <Button
                 variant="outline"
                 className="px-8 py-4 text-base md:text-lg bg-white/80 backdrop-blur-sm w-full sm:w-auto min-h-[48px] font-semibold btn-hover-effect rounded-xl border-2 border-blue-200 hover:border-blue-400 hover:text-blue-600 hover:bg-blue-50/80 shadow-lg hover:shadow-xl transition-all duration-300"
               >
                 <span className="relative z-10">Watch Demo Video</span>
+              </Button> */}
+              <Button
+                id="demo"
+                variant="outline"
+                className="group relative px-8 py-4 text-base md:text-lg bg-white/80 backdrop-blur-sm w-full sm:w-auto min-h-[48px] font-semibold btn-hover-effect rounded-xl border-2 border-blue-200 hover:border-blue-400 hover:text-blue-600 hover:bg-blue-50/80 shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden"
+              >
+                {/* Default text */}
+                <span className="block transition-all duration-300 transform group-hover:-translate-y-2 group-hover:opacity-0">
+                  Watch Demo Video
+                </span>
+
+                {/* Hover text */}
+                <span className="absolute inset-0 flex items-center justify-center transition-all duration-300 transform translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100">
+                  Coming Soon...
+                </span>
               </Button>
             </div>
             {/* 
@@ -227,11 +301,11 @@ export default function HomePage() {
                       <div className="text-xs sm:text-sm text-gray-600 font-medium">Years of Excellence</div>
                     </div>
                     <div className="text-center p-3 sm:p-4 card-hover bg-gradient-to-br from-cyan-50 to-cyan-100 rounded-lg min-h-[100px] flex flex-col justify-center animate-float-medium animate-delay-500">
-                      <div className="text-xl sm:text-2xl md:text-3xl font-bold text-blue-600">5,000+</div>
+                      <div className="text-xl sm:text-2xl md:text-3xl font-bold text-blue-600">2999+</div>
                       <div className="text-xs sm:text-sm text-gray-600 font-medium">Reports Generated</div>
                     </div>
                     <div className="text-center p-3 sm:p-4 card-hover bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg min-h-[100px] flex flex-col justify-center animate-float-fast animate-delay-1000">
-                      <div className="text-xl sm:text-2xl md:text-3xl font-bold text-blue-600">1,000+</div>
+                      <div className="text-xl sm:text-2xl md:text-3xl font-bold text-blue-600">999+</div>
                       <div className="text-xs sm:text-sm text-gray-600 font-medium">Satisfied Students</div>
                     </div>
                     <div className="text-center p-3 sm:p-4 card-hover bg-gradient-to-br from-cyan-50 to-cyan-100 rounded-lg min-h-[100px] flex flex-col justify-center animate-float-medium animate-delay-1500">
@@ -286,7 +360,7 @@ export default function HomePage() {
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 md:gap-8 mb-12 md:mb-16">
               <div className="text-center bg-white rounded-lg p-4 shadow-sm hover:shadow-md transition-all duration-300 hover:scale-105">
                 <AnimatedCounter
-                  end={5000}
+                  end={2999}
                   suffix="+"
                   className="text-2xl sm:text-3xl md:text-4xl font-bold text-blue-600 mb-2"
                 />
@@ -294,7 +368,7 @@ export default function HomePage() {
               </div>
               <div className="text-center bg-white rounded-lg p-4 shadow-sm hover:shadow-md transition-all duration-300 hover:scale-105">
                 <AnimatedCounter
-                  end={1000}
+                  end={999}
                   suffix="+"
                   className="text-2xl sm:text-3xl md:text-4xl font-bold text-blue-600 mb-2"
                 />
@@ -349,7 +423,7 @@ export default function HomePage() {
                 </CardHeader>
                 <CardContent>
                   <p className="text-gray-600 text-sm sm:text-base leading-relaxed">
-                    Join over 5,000 successful students who have transformed their academic journey with our platform.
+                    Join over 999+ successful students who have transformed their academic journey with our platform.
                   </p>
                 </CardContent>
               </Card>
@@ -407,12 +481,12 @@ export default function HomePage() {
               <Card className="transition-all duration-300 hover:shadow-xl hover:scale-105 hover:-translate-y-2 group">
                 <CardHeader className="pb-3">
                   <CardTitle className="text-base sm:text-lg group-hover:text-blue-600 transition-colors duration-200">
-                    Collaboration Tools
+                    Smart Academic Toolkit
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
                   <p className="text-gray-600 text-sm sm:text-base leading-relaxed">
-                    Work with teammates in real time, share drafts, and co-edit reports with seamless version control.
+                    Generate UML diagrams, create flow charts, check grammar accuracy, and track your project progress — all in one place.
                   </p>
                 </CardContent>
               </Card>
@@ -611,15 +685,15 @@ export default function HomePage() {
                   </p>
                   <div className="flex items-center space-x-3">
                     <Image
-                      src="/young-woman-computer-science-headshot.webp"
-                      alt="Aditi Sharma"
+                      src="https://www.api.aiprojectreport.com/website/sakshi.webp"
+                      alt="Ankita R."
                       width={48}   // 👈 matches w-12 (12 * 4px = 48px)
                       height={48}  // 👈 matches h-12 (12 * 4px = 48px)
                       className="rounded-full object-cover"
                     />
                     <div>
-                      <div className="font-semibold">Aditi Sharma</div>
-                      <div className="text-sm text-gray-500">Computer Science Student, IIT Delhi</div>
+                      <div className="font-semibold">Sakshi R.</div>
+                      <div className="text-sm text-gray-500">Computer Engg, MSBTE </div>
                     </div>
                   </div>
                 </CardContent>
@@ -628,20 +702,19 @@ export default function HomePage() {
               <Card>
                 <CardContent className="p-6">
                   <p className="text-gray-600 mb-4">
-                    "The AI-powered suggestions helped me organize my thoughts better. The templates are exactly what
-                    our professors expect. Highly recommended!"
+                    "This is like having a personal report assistant. The AI understood my topic, wrote detailed content, and formatted everything according to my department’s guidelines."
                   </p>
                   <div className="flex items-center space-x-3">
                     <Image
-                      src="/young-asian-engineer-headshot.webp"
-                      alt="Rohan Mehta"
+                      src="https://www.api.aiprojectreport.com/website/kaushik.webp"
+                      alt="Kaushik G."
                       width={48}   // w-12 = 48px
                       height={48}  // h-12 = 48px
                       className="rounded-full object-cover"
                     />
                     <div>
-                      <div className="font-semibold">Rohan Mehta</div>
-                      <div className="text-sm text-gray-500">Engineering Student, IIT Bombay</div>
+                      <div className="font-semibold">Kaushik G.</div>
+                      <div className="text-sm text-gray-500">Computer Science, RTMNU</div>
                     </div>
                   </div>
                 </CardContent>
@@ -655,15 +728,15 @@ export default function HomePage() {
                   </p>
                   <div className="flex items-center space-x-3">
                     <Image
-                      src="/latina-business-student-headshot.webp"
-                      alt="Sneha Reddy"
+                      src="https://www.api.aiprojectreport.com/website/sanikaL.webp"
+                      alt="Sanika L."
                       width={48}   // w-12 = 48px
                       height={48}  // h-12 = 48px
                       className="rounded-full object-cover"
                     />
                     <div>
-                      <div className="font-semibold">Sneha Reddy</div>
-                      <div className="text-sm text-gray-500">MBA Student, IIM Ahmedabad</div>
+                      <div className="font-semibold">Sanika L.</div>
+                      <div className="text-sm text-gray-500">Computer Engg, Pune University</div>
                     </div>
                   </div>
                 </CardContent>
@@ -672,20 +745,19 @@ export default function HomePage() {
               <Card>
                 <CardContent className="p-6">
                   <p className="text-gray-600 mb-4">
-                    "The citation management and bibliography features are outstanding. It automatically formatted
-                    everything according to my university's guidelines."
+                    "I uploaded my project details and within minutes had a professional-looking report ready to submit. The AI maintained academic tone and structure perfectly."
                   </p>
                   <div className="flex items-center space-x-3">
                     <Image
-                      src="/placeholder-5u68k.png"
+                      src="https://www.api.aiprojectreport.com/website/pratik.webp"
                       alt="Arjun Verma"
                       width={48}   // w-12 = 48px
                       height={48}  // h-12 = 48px
                       className="rounded-full object-cover"
                     />
                     <div>
-                      <div className="font-semibold">Arjun Verma</div>
-                      <div className="text-sm text-gray-500">Data Science Student, IIIT Hyderabad</div>
+                      <div className="font-semibold">Pratik D.</div>
+                      <div className="text-sm text-gray-500">MCA, SPPU</div>
                     </div>
                   </div>
                 </CardContent>
@@ -694,20 +766,19 @@ export default function HomePage() {
               <Card>
                 <CardContent className="p-6">
                   <p className="text-gray-600 mb-4">
-                    "As an international student, I was worried about meeting academic writing standards. AI Report Studio
-                    helped me create a report that exceeded expectations."
+                    "As a final-year student, I’ve used many report templates, but this AI platform truly simplifies academic writing. It automates everything from structure to citations flawlessly."
                   </p>
                   <div className="flex items-center space-x-3">
                     <Image
-                      src="/young-indian-woman-psychology-student-headshot.webp"
-                      alt="Priya Patel"
+                      src="https://www.api.aiprojectreport.com/website/Pratiksha.webp"
+                      alt="Pratiksha D."
                       width={48}   // w-12 = 48px
                       height={48}  // h-12 = 48px
                       className="rounded-full object-cover"
                     />
                     <div>
-                      <div className="font-semibold">Priya Patel</div>
-                      <div className="text-sm text-gray-500">Psychology Student, Delhi University</div>
+                      <div className="font-semibold">Pratiksha D.</div>
+                      <div className="text-sm text-gray-500">Computer Science, SPPU</div>
                     </div>
                   </div>
                 </CardContent>
@@ -716,20 +787,19 @@ export default function HomePage() {
               <Card>
                 <CardContent className="p-6">
                   <p className="text-gray-600 mb-4">
-                    "The technical diagram integration and equation formatting features are incredible. My engineering
-                    report looked publication-ready."
+                    "Creating my final-year project report used to be stressful, but this platform made it effortless. It handled formatting, citations, and even the table of contents — flawlessly!"
                   </p>
                   <div className="flex items-center space-x-3">
                     <Image
-                      src="/young-engineer-headshot.webp"
-                      alt="Karan Malhotra"
+                      src="https://www.api.aiprojectreport.com/website/snehal.webp"
+                      alt="Snehal G."
                       width={48}   // w-12 = 48px
                       height={48}  // h-12 = 48px
                       className="rounded-full object-cover"
                     />
                     <div>
-                      <div className="font-semibold">Karan Malhotra</div>
-                      <div className="text-sm text-gray-500">Mechanical Engineering, BITS Pilani</div>
+                      <div className="font-semibold">Snehal G.</div>
+                      <div className="text-sm text-gray-500">General Science, NMU</div>
                     </div>
                   </div>
                 </CardContent>
@@ -771,22 +841,22 @@ export default function HomePage() {
                 <CardContent>
                   <ul className="space-y-3 mb-6">
                     <li className="flex items-center">
-                      <span className="text-green-500 mr-2">✓</span>1 Report per month
+                      <span className="text-green-500 mr-2">✓</span>500 credits per month
                     </li>
                     <li className="flex items-center">
-                      <span className="text-green-500 mr-2">✓</span>Basic templates
+                      <span className="text-green-500 mr-2">✓</span>Max. 100 credits per day
                     </li>
                     <li className="flex items-center">
-                      <span className="text-green-500 mr-2">✓</span>Standard formatting
+                      <span className="text-green-500 mr-2">✓</span>No support available
                     </li>
                     <li className="flex items-center">
-                      <span className="text-green-500 mr-2">✓</span>Email support
-                    </li>
-                    <li className="flex items-center">
-                      <span className="text-green-500 mr-2">✓</span>Basic citations
+                      <span className="text-green-500 mr-2">✓</span>3 days backup
                     </li>
                     <li className="flex items-center">
                       <span className="text-green-500 mr-2">✓</span>PDF export
+                    </li>
+                    <li className="flex items-center">
+                      <span className="text-green-500 mr-2">✓</span>Text based report generation
                     </li>
                   </ul>
                   <Button className="w-full bg-transparent" variant="outline">
@@ -798,37 +868,67 @@ export default function HomePage() {
               <Card className="border-blue-500 border-2 relative">
                 <Badge className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-blue-500">Most Popular</Badge>
                 <CardHeader>
-                  <CardTitle className="text-2xl">Student</CardTitle>
+                  <CardTitle className="text-2xl">Premium</CardTitle>
                   <div className="text-4xl font-bold">
-                    $49<span className="text-lg font-normal">/per month</span>
+                    ₹749<span className="text-lg font-normal">/per month</span>
                   </div>
-                  <CardDescription>Ideal for final year students</CardDescription>
+                  <CardDescription>11 Modules included</CardDescription>
                 </CardHeader>
                 <CardContent>
                   <ul className="space-y-3 mb-6">
                     <li className="flex items-center">
-                      <span className="text-green-500 mr-2">✓</span>10 Reports per month
+                      <span className="text-green-500 mr-2">✓</span>Human toned report generation
                     </li>
                     <li className="flex items-center">
-                      <span className="text-green-500 mr-2">✓</span>Premium templates
+                      <span className="text-green-500 mr-2">✓</span>15,000 Credits per month
                     </li>
                     <li className="flex items-center">
-                      <span className="text-green-500 mr-2">✓</span>Advanced formatting
+                      <span className="text-green-500 mr-2">✓</span>Max. 1000 credits per day
                     </li>
                     <li className="flex items-center">
-                      <span className="text-green-500 mr-2">✓</span>Priority support
+                      <span className="text-green-500 mr-2">✓</span>High quality output
                     </li>
                     <li className="flex items-center">
-                      <span className="text-green-500 mr-2">✓</span>Advanced citations
+                      <span className="text-green-500 mr-2">✓</span>Support available via telegram/Email
                     </li>
                     <li className="flex items-center">
-                      <span className="text-green-500 mr-2">✓</span>Multiple export formats
+                      <span className="text-green-500 mr-2">✓</span>180 days data backup
+                    </li>
+                    <li className="flex items-center">
+                      <span className="text-green-500 mr-2">✓</span>31 days validity
+                    </li>
+                    <li className="flex items-center">
+                      <span className="text-green-500 mr-2">✓</span>Text based report generation
                     </li>
                     <li className="flex items-center">
                       <span className="text-green-500 mr-2">✓</span>Plagiarism checker
                     </li>
                     <li className="flex items-center">
-                      <span className="text-green-500 mr-2">✓</span>Grammar assistance
+                      <span className="text-green-500 mr-2">✓</span>Image generation
+                    </li>
+                    <li className="flex items-center">
+                      <span className="text-green-500 mr-2">✓</span>Viva questions generation
+                    </li>
+                    <li className="flex items-center">
+                      <span className="text-green-500 mr-2">✓</span>Report auditing
+                    </li>
+                    <li className="flex items-center">
+                      <span className="text-green-500 mr-2">✓</span>PPT generator
+                    </li>
+                    <li className="flex items-center">
+                      <span className="text-green-500 mr-2">✓</span>UML generator
+                    </li>
+                    <li className="flex items-center">
+                      <span className="text-green-500 mr-2">✓</span>Flow chart generation
+                    </li>
+                    <li className="flex items-center">
+                      <span className="text-green-500 mr-2">✓</span>Grammer checker
+                    </li>
+                    <li className="flex items-center">
+                      <span className="text-green-500 mr-2">✓</span>Progress tracker
+                    </li>
+                    <li className="flex items-center">
+                      <span className="text-green-500 mr-2">✓</span>Feedback generation
                     </li>
                   </ul>
                   <Button className="w-full bg-blue-600 hover:bg-blue-700">Start Free Trial</Button>
@@ -839,41 +939,53 @@ export default function HomePage() {
                 <CardHeader>
                   <CardTitle className="text-2xl">Pro</CardTitle>
                   <div className="text-4xl font-bold">
-                    $99<span className="text-lg font-normal">/per month</span>
+                    ₹349<span className="text-lg font-normal">/per week</span>
                   </div>
-                  <CardDescription>For students with multiple projects</CardDescription>
+                  <CardDescription>7 Modules Included</CardDescription>
                 </CardHeader>
                 <CardContent>
                   <ul className="space-y-3 mb-6">
                     <li className="flex items-center">
-                      <span className="text-green-500 mr-2">✓</span>Unlimited reports
+                      <span className="text-green-500 mr-2">✓</span>Human toned report generation
                     </li>
                     <li className="flex items-center">
-                      <span className="text-green-500 mr-2">✓</span>All premium templates
+                      <span className="text-green-500 mr-2">✓</span>7,500 credits per month
                     </li>
                     <li className="flex items-center">
-                      <span className="text-green-500 mr-2">✓</span>Custom formatting
+                      <span className="text-green-500 mr-2">✓</span>Max. 600 credits per day
                     </li>
                     <li className="flex items-center">
-                      <span className="text-green-500 mr-2">✓</span>24/7 priority support
+                      <span className="text-green-500 mr-2">✓</span>High quality output
                     </li>
                     <li className="flex items-center">
-                      <span className="text-green-500 mr-2">✓</span>Advanced citations & bibliography
+                      <span className="text-green-500 mr-2">✓</span>Support available via telegram/Email
                     </li>
                     <li className="flex items-center">
-                      <span className="text-green-500 mr-2">✓</span>All export formats
+                      <span className="text-green-500 mr-2">✓</span>31 days data backup
                     </li>
                     <li className="flex items-center">
-                      <span className="text-green-500 mr-2">✓</span>Advanced plagiarism checker
+                      <span className="text-green-500 mr-2">✓</span>7 days validity
                     </li>
                     <li className="flex items-center">
-                      <span className="text-green-500 mr-2">✓</span>AI writing assistant
+                      <span className="text-green-500 mr-2">✓</span>Text based report generation
                     </li>
                     <li className="flex items-center">
-                      <span className="text-green-500 mr-2">✓</span>Collaboration tools
+                      <span className="text-green-500 mr-2">✓</span>Plagiarism checker
                     </li>
                     <li className="flex items-center">
-                      <span className="text-green-500 mr-2">✓</span>Custom branding
+                      <span className="text-green-500 mr-2">✓</span>Image generation
+                    </li>
+                    <li className="flex items-center">
+                      <span className="text-green-500 mr-2">✓</span>Viva questions generation
+                    </li>
+                    <li className="flex items-center">
+                      <span className="text-green-500 mr-2">✓</span>Grammer checker
+                    </li>
+                    <li className="flex items-center">
+                      <span className="text-green-500 mr-2">✓</span>Progress tracker
+                    </li>
+                    <li className="flex items-center">
+                      <span className="text-green-500 mr-2">✓</span>Feedback generation
                     </li>
                   </ul>
                   <Button className="w-full bg-transparent" variant="outline">
@@ -908,38 +1020,41 @@ export default function HomePage() {
               </div>
 
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-                {blogPosts.slice(0, 6).map((post, index) => (
-                  <Card
-                    key={post.slug}
-                    className={`hover:shadow-xl transition-all duration-500 hover:-translate-y-3 bg-white/80 backdrop-blur-sm border-0 shadow-lg card-hover animate-fade-in-scale animate-delay-${(index + 1) * 100}`}
-                  >
-                    <CardHeader>
-                      <Badge variant="secondary" className="w-fit mb-2 animate-bounce-subtle">
-                        {post.category}
-                      </Badge>
-                      <CardTitle className="text-lg line-clamp-2 hover:text-blue-600 transition-colors">
-                        {post.title}
-                      </CardTitle>
-                      <CardDescription className="line-clamp-3">{post.description}</CardDescription>
-                    </CardHeader>
-                    <CardContent>
-                      <div className="flex items-center justify-between text-sm text-gray-500 mb-2">
-                        <span>{post.author}</span>
-                        <span>{post.readTime}</span>
-                      </div>
-                      <div className="text-sm text-gray-500 mb-4">{post.publishedDate}</div>
-                      <Link href={`/blog/${post.slug}`}>
-                        <Button
-                          variant="outline"
-                          size="sm"
-                          className="hover:bg-blue-50 hover:border-blue-300 transition-all duration-300 bg-transparent btn-hover-effect"
-                        >
-                          Read More
-                        </Button>
-                      </Link>
-                    </CardContent>
-                  </Card>
-                ))}
+                {
+                  data.length === 0 ? "Currently no blogs available" :
+
+                    data.map((post, index) => (
+                      <Card
+                        key={post.slug}
+                        className={`hover:shadow-xl transition-all duration-500 hover:-translate-y-3 bg-white/80 backdrop-blur-sm border-0 shadow-lg card-hover animate-fade-in-scale animate-delay-${(index + 1) * 100}`}
+                      >
+                        <CardHeader>
+                          <Badge variant="secondary" className="w-fit mb-2 animate-bounce-subtle">
+                            {post.category}
+                          </Badge>
+                          <CardTitle className="text-lg line-clamp-2 hover:text-blue-600 transition-colors">
+                            {post.title}
+                          </CardTitle>
+                          <CardDescription className="line-clamp-3">{post.description}</CardDescription>
+                        </CardHeader>
+                        <CardContent>
+                          <div className="flex items-center justify-between text-sm text-gray-500 mb-2">
+                            <span>{post.author}</span>
+                            <span>{post.readTime}</span>
+                          </div>
+                          <div className="text-sm text-gray-500 mb-4">{post.publishedDate}</div>
+                          <Link href={`/blog/${post.slug}`}>
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              className="hover:bg-blue-50 hover:border-blue-300 transition-all duration-300 bg-transparent btn-hover-effect"
+                            >
+                              Read More
+                            </Button>
+                          </Link>
+                        </CardContent>
+                      </Card>
+                    ))}
               </div>
 
               <div className="text-center">
@@ -996,7 +1111,14 @@ export default function HomePage() {
                     <div className="text-blue-600 mt-1 flex-shrink-0">📚</div>
                     <div>
                       <div className="font-semibold text-gray-900">Telegram Support</div>
-                      <div className="text-gray-600 text-sm sm:text-base">@aireportstudio</div>
+                      <a
+                        href="https://t.me/aireportstudio"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-gray-600 text-sm sm:text-base hover:text-blue-500 transition-colors"
+                      >
+                        @AiReportStudio
+                      </a>
                       <div className="text-gray-500 text-xs sm:text-sm">Expert guidance for complex projects</div>
                     </div>
                   </div>
@@ -1004,7 +1126,7 @@ export default function HomePage() {
               </div>
 
               <div className="animate-fade-in-right">
-                <Card className="shadow-sm">
+                {/* <Card className="shadow-sm">
                   <CardHeader>
                     <CardTitle className="text-lg sm:text-xl">Send us a Message</CardTitle>
                     <CardDescription>We'll get back to you within 24 hours</CardDescription>
@@ -1058,7 +1180,92 @@ export default function HomePage() {
                       Send Message
                     </Button>
                   </CardContent>
+                </Card> */}
+                <Card className="shadow-sm">
+                  <CardHeader>
+                    <CardTitle className="text-lg sm:text-xl">Send us a Message</CardTitle>
+                    <CardDescription>We'll get back to you within 24 hours</CardDescription>
+                  </CardHeader>
+                  <CardContent className="space-y-4">
+                    {success && <p className="text-green-600">{success}</p>}
+                    {error && <p className="text-red-600">{error}</p>}
+
+                    <form onSubmit={handleSubmit} className="space-y-4">
+                      <div className="grid sm:grid-cols-2 gap-4">
+                        <div>
+                          <label className="block text-sm font-medium text-gray-700 mb-2">First Name</label>
+                          <input
+                            type="text"
+                            value={fname}
+                            onChange={(e) => setFname(e.target.value)}
+                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm sm:text-base min-h-[44px]"
+                            placeholder="John"
+                            required
+                          />
+                        </div>
+                        <div>
+                          <label className="block text-sm font-medium text-gray-700 mb-2">Last Name</label>
+                          <input
+                            type="text"
+                            value={lname}
+                            onChange={(e) => setLname(e.target.value)}
+                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm sm:text-base min-h-[44px]"
+                            placeholder="Doe"
+                            required
+                          />
+                        </div>
+                      </div>
+
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">Email</label>
+                        <input
+                          type="email"
+                          value={email}
+                          onChange={(e) => setEmail(e.target.value)}
+                          className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm sm:text-base min-h-[44px]"
+                          placeholder="john.doe@example.com"
+                          required
+                        />
+                      </div>
+
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">Subject</label>
+                        <select
+                          value={subject}
+                          onChange={(e) => setSubject(e.target.value)}
+                          className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm sm:text-base min-h-[44px]"
+                        >
+                          <option>General Inquiry</option>
+                          <option>Technical Support</option>
+                          <option>Academic Guidance</option>
+                          <option>Billing Question</option>
+                          <option>Feature Request</option>
+                        </select>
+                      </div>
+
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">Message</label>
+                        <textarea
+                          rows={4}
+                          value={message}
+                          onChange={(e) => setMessage(e.target.value)}
+                          className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm sm:text-base"
+                          placeholder="Tell us how we can help you..."
+                          required
+                        ></textarea>
+                      </div>
+
+                      <Button
+                        type="submit"
+                        className="w-full bg-blue-600 hover:bg-blue-700 text-white btn-hover-effect min-h-[44px]"
+                        disabled={loading}
+                      >
+                        {loading ? "Sending..." : "Send Message"}
+                      </Button>
+                    </form>
+                  </CardContent>
                 </Card>
+                
               </div>
             </div>
           </div>
@@ -1154,13 +1361,13 @@ export default function HomePage() {
                   </Link>
                 </li>
                 <li>
-                  <a href="#" className="text-gray-400 hover:text-white transition-colors">
+                  <a href="#contact" className="text-gray-400 hover:text-white transition-colors">
                     Help Center
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="text-gray-400 hover:text-white transition-colors">
-                    Tutorials
+                  <a href="#demo" className="text-gray-400 hover:text-white transition-colors">
+                    Demo Video
                   </a>
                 </li>
                 {/* <li>

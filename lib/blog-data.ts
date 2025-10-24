@@ -1,15 +1,17 @@
 export interface BlogPost {
+  // faqs: { question: string; answer: string }[]
   slug: string
   title: string
   description: string
   content: string
+  category: string
   author: string
-  authorRole: string
   publishedDate: string
   readTime: string
-  category: string
   tags: string[]
-  featured: boolean
+  featured?: boolean
+  authorRole?: string
+  image?: string   // ✅ add this line
 }
 
 export const blogPosts: BlogPost[] = [
