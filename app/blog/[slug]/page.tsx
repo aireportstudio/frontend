@@ -299,7 +299,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       title: post.title,
       description: post.description,
       type: "article",
-      url: `https://yourdomain.com/blog/${post.slug}`,
+      url: `https://www.aiprojectreport.com/blog/${post.slug}`,
       images: post.image ? [{ url: post.image }] : [],
     },
     twitter: {
@@ -308,7 +308,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       description: post.description,
       images: post.image ? [post.image] : [],
     },
-    alternates: { canonical: `https://yourdomain.com/blog/${post.slug}` },
+    alternates: { canonical: `https://www.aiprojectreport.com/blog/${post.slug}` },
   }
 }
 
@@ -455,7 +455,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
             author: { "@type": "Person", name: post.author },
             publisher: { "@type": "Organization", name: "AI Report Studio" },
             keywords: post.tags?.join(", "),
-            url: `https://yourdomain.com/blog/${post.slug}`,
+            url: `https://www.aiprojectreport.com/blog/${post.slug}`,
             datePublished: post.publishedDate,
           }),
         }}
@@ -483,9 +483,9 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
             "@context": "https://schema.org",
             "@type": "BreadcrumbList",
             itemListElement: [
-              { "@type": "ListItem", position: 1, name: "Home", item: "https://yourdomain.com/" },
-              { "@type": "ListItem", position: 2, name: "Blog", item: "https://yourdomain.com/blog" },
-              { "@type": "ListItem", position: 3, name: post.title, item: `https://yourdomain.com/blog/${post.slug}` },
+              { "@type": "ListItem", position: 1, name: "Home", item: "https://www.aiprojectreport.com/" },
+              { "@type": "ListItem", position: 2, name: "Blog", item: "https://www.aiprojectreport.com/blog" },
+              { "@type": "ListItem", position: 3, name: post.title, item: `https://www.aiprojectreport.com/blog/${post.slug}` },
             ],
           }),
         }}
@@ -502,19 +502,19 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                 "@type": "ListItem",
                 position: 1,
                 name: "Home",
-                item: "https://yourdomain.com/",
+                item: "https://www.aiprojectreport.com/",
               },
               {
                 "@type": "ListItem",
                 position: 2,
                 name: "Blog",
-                item: "https://yourdomain.com/blog",
+                item: "https://www.aiprojectreport.com/blog",
               },
               {
                 "@type": "ListItem",
                 position: 3,
                 name: post.title,
-                item: `https://yourdomain.com/blog/${post.slug}`,
+                item: `https://www.aiprojectreport.com/blog/${post.slug}`,
               },
             ],
           }),

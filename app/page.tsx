@@ -1044,8 +1044,8 @@ export default function HomePage() {
                         </CardHeader>
                         <CardContent>
                           <div className="flex items-center justify-between text-sm text-gray-500 mb-2">
-                            <span>{post.author}</span>
-                            <span>{post.readTime}</span>
+                            <span>By {post.author}</span>
+                            <span>{post.readTime} mins</span>
                           </div>
                           <div className="text-sm text-gray-500 mb-4">{post.publishedDate}</div>
                           <Link href={`/blog/${post.slug}`}>

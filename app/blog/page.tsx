@@ -93,7 +93,7 @@ export const metadata: Metadata = {
     url: "https://www.aiprojectreport.com/blog",
     siteName: "AI Report Studio",
     images: [
-      { url: "https://yourdomain.com/og-image.jpg", width: 1200, height: 630, alt: "AI Report Studio | AI Project Report Generator" },
+      { url: "https://www.api.aiprojectreport.com/website/logo.webp", width: 1200, height: 630, alt: "AI Report Studio | AI Project Report Generator" },
     ],
     locale: "en_IN",
     type: "website",
