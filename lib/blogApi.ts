@@ -115,8 +115,8 @@ export async function fetchThreePosts(): Promise<BlogPost[]> {
 }
 
 export async function fetchBlogBySlug(slug: string): Promise<BlogPost | null> {
-  const res = await fetch(`${API_URL}/?slug=${slug}`, {
-    next: { revalidate: 60 }, // ✅ ISR - revalidate every 1 minute
+  const res = await fetch(`${API_URL}/slug/${slug}`, {   // 👈 CHANGED
+    next: { revalidate: 60 },
   });
 
   if (!res.ok) {
@@ -125,7 +125,7 @@ export async function fetchBlogBySlug(slug: string): Promise<BlogPost | null> {
 
   const data = await res.json();
 
-  const post = Array.isArray(data) ? data[0] : data; // handle if array or single object
+  const post = Array.isArray(data) ? data[0] : data;
 
   return {
     id: post.id,
@@ -142,6 +142,7 @@ export async function fetchBlogBySlug(slug: string): Promise<BlogPost | null> {
     image: post.image,
   };
 }
+
 
 // Fetch all categories
 export async function fetchAllCategories(): Promise<string[]> {
