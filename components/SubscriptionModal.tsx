@@ -14,7 +14,7 @@ export default function SubscriptionModal({ isOpen, onClose }: SubscriptionModal
     const handleSubscribe = async (e: React.FormEvent) => {
         e.preventDefault();
         try {
-            const res = await fetch("https://api.aiprojectreport.com/subscribe/create", {
+            const res = await fetch("https://ai-report-studio.projectwork9892.workers.dev/subscribe/create", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ email }),

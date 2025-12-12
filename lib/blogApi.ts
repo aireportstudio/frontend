@@ -13,7 +13,7 @@
 //   image?: string
 // }
 
-// const API_URL = "https://api.aiprojectreport.com/blogs"
+// const API_URL = "https://ai-report-studio.projectwork9892.workers.dev/blogs"
 
 // // Fetch all blogs
 // export async function fetchAllPosts(): Promise<BlogPost[]> {
@@ -64,7 +64,7 @@ export interface BlogPost {
   image?: string
 }
 
-const API_URL = "https://api.aiprojectreport.com/blogs"
+const API_URL = "https://ai-report-studio.projectwork9892.workers.dev/blogs"
 
 // Fetch all blog posts
 export async function fetchAllPosts(): Promise<BlogPost[]> {

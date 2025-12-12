@@ -28,7 +28,7 @@ export const runtime = "edge"; // optional for edge runtime
 
 export async function GET() {
   // Fetch your blogs from API
-  const res = await fetch("https://api.aiprojectreport.com/blogs");
+  const res = await fetch("https://ai-report-studio.projectwork9892.workers.dev/blogs");
   const blogs = await res.json();
 
   // Start building sitemap XML

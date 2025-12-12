@@ -23,6 +23,14 @@ images: {
         protocol: "https",
         hostname: "www.api.aiprojectreport.com",
       },
+      {
+        protocol: "https",
+        hostname: "pub-02829b422ac049a0a11ee1c4ca66bb96.r2.dev"
+      },
+      {
+        protocol: "https",
+        hostname: "https://ai-report-studio.projectwork9892.workers.dev"
+      }
     ],
   },
 
