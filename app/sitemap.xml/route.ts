@@ -8,9 +8,12 @@ export async function GET() {
   const now = new Date().toISOString();
 
   try {
+    /* ✅ FIX: call without arguments */
     const blogPosts = await fetchAllPosts();
 
-    const blogUrls = blogPosts
+    const posts = Array.isArray(blogPosts) ? blogPosts : [];
+
+    const blogUrls = posts
       .map(
         (post: any) => `
   <url>
@@ -69,7 +72,6 @@ export async function GET() {
   } catch (error) {
     console.error("Error generating sitemap:", error);
 
-    // ✅ Fallback sitemap (never break build)
     const fallbackSitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
@@ -83,6 +85,7 @@ export async function GET() {
     return new NextResponse(fallbackSitemap, {
       headers: {
         "Content-Type": "application/xml",
+        "Cache-Control": "public, s-maxage=300",
       },
     });
   }
