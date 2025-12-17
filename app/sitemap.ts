@@ -9,8 +9,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   try {
     posts = await fetchAllPosts();
-  } catch (e) {
-    console.error("Sitemap fetch failed:", e);
+  } catch (error) {
+    console.error("Sitemap fetch failed:", error);
   }
 
   return [
