@@ -1,5 +1,7 @@
 "use client"
 
+import type React from "react"
+
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
@@ -12,36 +14,123 @@ import { SectionReveal } from "@/components/section-reveal"
 import { useState, useEffect } from "react"
 import Link from "next/link"
 import MovingDotsBackground from "@/components/moving-dots-background"
-import { blogPosts } from "@/lib/blog-data"
-import { Instagram, Youtube, Mail, Send, Linkedin } from "lucide-react"
+import { Instagram, Youtube, Mail, Linkedin } from "lucide-react"
 import Image from "next/image"
 import { fetchThreePosts } from "@/lib/blogApi"
 import SubscriptionModal from "@/components/SubscriptionModal"
+
+const homepageFAQSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: [
+    {
+      "@type": "Question",
+      name: "What is AIProjectReport.com?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "AIProjectReport.com is an AI-powered online tool that helps students generate complete, well-structured project reports automatically. Simply enter your course, department, and project details, and our AI creates a ready-to-download professional report.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "How does the AI Project Report Generator work?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Our system uses advanced artificial intelligence to analyze your project inputs (like project title, course, and objectives) and generate detailed sections such as Introduction, Abstract, Methodology, Results, and Conclusion — all formatted according to academic standards.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Who can use AIProjectReport.com?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "It's designed for college and university students across all departments — engineering, computer science, management, arts, commerce, and more.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Is AIProjectReport.com free to use?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "You can generate and preview reports for free. Some premium features (like plagiarism check, detailed formatting, or extra export formats) may require an upgrade.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "What makes AIProjectReport.com different from other report tools?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Our platform creates course-specific, department-tailored reports with AI — ensuring the content matches your academic expectations and looks like a professionally written report.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Can I generate a report for any course or stream?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Yes! Our AI supports reports for all major streams — Engineering, Computer Science, Management, Commerce, Arts, Science, and more.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Can I generate reports for BTech, MBA, BBA, or MSc projects?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Absolutely. Just select your course type and department, and our AI will adapt the report structure and language accordingly.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "What if my project topic is unique or uncommon?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "No problem — our AI analyzes your custom topic and generates original, context-specific content that fits your project title and field of study.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Can I edit or customize the report after generation?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Yes, you can review, edit, or add your own content before downloading the final version.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "What formats can I download my report in?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "You can download reports in PDF, DOCX, or TXT formats for easy submission and printing.",
+      },
+    },
+  ],
+}
+
 interface Blog {
-  id: number;
-  slug: string;
-  title: string;
-  description: string;
-  author: string;
-  category: string;
-  featured: boolean;
-  image: string;
-  publishedDate: string;
-  readTime: string;
+  id: number
+  slug: string
+  title: string
+  description: string
+  author: string
+  category: string
+  featured: boolean
+  image: string
+  publishedDate: string
+  readTime: string
 }
 export default function HomePage() {
   const [isVisible, setIsVisible] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [data, setData] = useState<Blog[]>([])
-  const [fname, setFname] = useState("");
-  const [lname, setLname] = useState("");
-  const [email, setEmail] = useState("");
-  const [subject, setSubject] = useState("General Inquiry");
-  const [message, setMessage] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [success, setSuccess] = useState("");
-  const [error, setError] = useState("");
-  const [isModalOpen, setModalOpen] = useState(false);
+  const [fname, setFname] = useState("")
+  const [lname, setLname] = useState("")
+  const [email, setEmail] = useState("")
+  const [subject, setSubject] = useState("General Inquiry")
+  const [message, setMessage] = useState("")
+  const [loading, setLoading] = useState(false)
+  const [success, setSuccess] = useState("")
+  const [error, setError] = useState("")
+  const [isModalOpen, setModalOpen] = useState(false)
   useEffect(() => {
     setIsVisible(true)
     fetchThreePosts()
@@ -49,45 +138,44 @@ export default function HomePage() {
         setData(fetchData)
       })
       .catch((error) => {
-        console.error("Error fetching posts:", error);
-      });
-
+        console.error("Error fetching posts:", error)
+      })
   }, [])
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setLoading(true);
-    setSuccess("");
-    setError("");
+    e.preventDefault()
+    setLoading(true)
+    setSuccess("")
+    setError("")
 
     try {
       const res = await fetch("https://ai-report-studio.projectwork9892.workers.dev/contacts/create", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ fname, lname, email, subject, message }),
-      });
+      })
 
-      const data = await res.json();
+      const data = await res.json()
 
-      if (!res.ok) throw new Error(data.error || "Something went wrong");
+      if (!res.ok) throw new Error(data.error || "Something went wrong")
 
-      setSuccess("Message sent successfully!");
-      setFname("");
-      setLname("");
-      setEmail("");
-      setSubject("General Inquiry");
-      setMessage("");
+      setSuccess("Message sent successfully!")
+      setFname("")
+      setLname("")
+      setEmail("")
+      setSubject("General Inquiry")
+      setMessage("")
     } catch (err: any) {
-      setError(err.message || "Failed to send message");
+      setError(err.message || "Failed to send message")
     } finally {
-      setLoading(false);
+      setLoading(false)
     }
-  };
-
-
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-cyan-50">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(homepageFAQSchema) }} />
+
       <SmoothScroll />
 
       {/* Navigation Header */}
@@ -230,7 +318,10 @@ export default function HomePage() {
             <div
               className={`flex flex-col sm:flex-row justify-center items-center gap-4 mb-8 px-4 ${isVisible ? "animate-fade-in-up animate-delay-500" : "opacity-0"}`}
             >
-              <Button onClick={() => setModalOpen(true)} className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-8 py-4 text-base md:text-lg w-full sm:w-auto min-h-[48px] font-semibold btn-hover-effect rounded-xl shadow-lg hover:shadow-xl transition-all duration-300">
+              <Button
+                onClick={() => setModalOpen(true)}
+                className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-8 py-4 text-base md:text-lg w-full sm:w-auto min-h-[48px] font-semibold btn-hover-effect rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
+              >
                 <span className="relative z-10">Get Started Free</span>
               </Button>
               {/* <Button
@@ -255,7 +346,7 @@ export default function HomePage() {
                 </span>
               </Button>
             </div>
-            {/* 
+            {/*
             <p
               className={`text-xs sm:text-sm text-gray-500 px-4 animate-bounce-subtle ${isVisible ? "animate-fade-in-up animate-delay-600" : "opacity-0"}`}
             >
@@ -490,7 +581,8 @@ export default function HomePage() {
                 </CardHeader>
                 <CardContent>
                   <p className="text-gray-600 text-sm sm:text-base leading-relaxed">
-                    Generate UML diagrams, create flow charts, check grammar accuracy, and track your project progress — all in one place.
+                    Generate UML diagrams, create flow charts, check grammar accuracy, and track your project progress —
+                    all in one place.
                   </p>
                 </CardContent>
               </Card>
@@ -679,7 +771,6 @@ export default function HomePage() {
               </Card>
             </div> */}
 
-
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
               <Card>
                 <CardContent className="p-6">
@@ -691,8 +782,8 @@ export default function HomePage() {
                     <Image
                       src="https://pub-02829b422ac049a0a11ee1c4ca66bb96.r2.dev/website/sakshi.webp"
                       alt="Ankita R."
-                      width={48}   // 👈 matches w-12 (12 * 4px = 48px)
-                      height={48}  // 👈 matches h-12 (12 * 4px = 48px)
+                      width={48} // 👈 matches w-12 (12 * 4px = 48px)
+                      height={48} // 👈 matches h-12 (12 * 4px = 48px)
                       className="rounded-full object-cover"
                     />
                     <div>
@@ -706,14 +797,15 @@ export default function HomePage() {
               <Card>
                 <CardContent className="p-6">
                   <p className="text-gray-600 mb-4">
-                    "This is like having a personal report assistant. The AI understood my topic, wrote detailed content, and formatted everything according to my department’s guidelines."
+                    "This is like having a personal report assistant. The AI understood my topic, wrote detailed
+                    content, and formatted everything according to my department’s guidelines."
                   </p>
                   <div className="flex items-center space-x-3">
                     <Image
                       src="https://pub-02829b422ac049a0a11ee1c4ca66bb96.r2.dev/website/kaushik.webp"
                       alt="Kaushik G."
-                      width={48}   // w-12 = 48px
-                      height={48}  // h-12 = 48px
+                      width={48} // w-12 = 48px
+                      height={48} // h-12 = 48px
                       className="rounded-full object-cover"
                     />
                     <div>
@@ -727,15 +819,15 @@ export default function HomePage() {
               <Card>
                 <CardContent className="p-6">
                   <p className="text-gray-600 mb-4">
-                    "I was struggling with my capstone project report until I found AI Report Studio. The platform made the
-                    entire process smooth and stress-free."
+                    "I was struggling with my capstone project report until I found AI Report Studio. The platform made
+                    the entire process smooth and stress-free."
                   </p>
                   <div className="flex items-center space-x-3">
                     <Image
                       src="https://pub-02829b422ac049a0a11ee1c4ca66bb96.r2.dev/website/sanikaL.webp"
                       alt="Sanika L."
-                      width={48}   // w-12 = 48px
-                      height={48}  // h-12 = 48px
+                      width={48} // w-12 = 48px
+                      height={48} // h-12 = 48px
                       className="rounded-full object-cover"
                     />
                     <div>
@@ -749,14 +841,15 @@ export default function HomePage() {
               <Card>
                 <CardContent className="p-6">
                   <p className="text-gray-600 mb-4">
-                    "I uploaded my project details and within minutes had a professional-looking report ready to submit. The AI maintained academic tone and structure perfectly."
+                    "I uploaded my project details and within minutes had a professional-looking report ready to submit.
+                    The AI maintained academic tone and structure perfectly."
                   </p>
                   <div className="flex items-center space-x-3">
                     <Image
                       src="https://pub-02829b422ac049a0a11ee1c4ca66bb96.r2.dev/website/pratik.webp"
                       alt="Arjun Verma"
-                      width={48}   // w-12 = 48px
-                      height={48}  // h-12 = 48px
+                      width={48} // w-12 = 48px
+                      height={48} // h-12 = 48px
                       className="rounded-full object-cover"
                     />
                     <div>
@@ -770,14 +863,15 @@ export default function HomePage() {
               <Card>
                 <CardContent className="p-6">
                   <p className="text-gray-600 mb-4">
-                    "As a final-year student, I’ve used many report templates, but this AI platform truly simplifies academic writing. It automates everything from structure to citations flawlessly."
+                    "As a final-year student, I’ve used many report templates, but this AI platform truly simplifies
+                    academic writing. It automates everything from structure to citations flawlessly."
                   </p>
                   <div className="flex items-center space-x-3">
                     <Image
                       src="https://pub-02829b422ac049a0a11ee1c4ca66bb96.r2.dev/website/Pratiksha.webp"
                       alt="Pratiksha D."
-                      width={48}   // w-12 = 48px
-                      height={48}  // h-12 = 48px
+                      width={48} // w-12 = 48px
+                      height={48} // h-12 = 48px
                       className="rounded-full object-cover"
                     />
                     <div>
@@ -791,14 +885,15 @@ export default function HomePage() {
               <Card>
                 <CardContent className="p-6">
                   <p className="text-gray-600 mb-4">
-                    "Creating my final-year project report used to be stressful, but this platform made it effortless. It handled formatting, citations, and even the table of contents — flawlessly!"
+                    "Creating my final-year project report used to be stressful, but this platform made it effortless.
+                    It handled formatting, citations, and even the table of contents — flawlessly!"
                   </p>
                   <div className="flex items-center space-x-3">
                     <Image
                       src="https://pub-02829b422ac049a0a11ee1c4ca66bb96.r2.dev/website/snehal.webp"
                       alt="Snehal G."
-                      width={48}   // w-12 = 48px
-                      height={48}  // h-12 = 48px
+                      width={48} // w-12 = 48px
+                      height={48} // h-12 = 48px
                       className="rounded-full object-cover"
                     />
                     <div>
@@ -809,7 +904,6 @@ export default function HomePage() {
                 </CardContent>
               </Card>
             </div>
-
 
             {/* <div className="text-center">
               <div className="flex justify-center items-center space-x-4 text-lg">
@@ -1025,10 +1119,9 @@ export default function HomePage() {
               </div>
 
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-                {
-                  data.length === 0 ? "Currently no blogs available" :
-
-                    data.map((post, index) => (
+                {data.length === 0
+                  ? "Currently no blogs available"
+                  : data.map((post, index) => (
                       <Card
                         key={post.slug}
                         className={`hover:shadow-xl transition-all duration-500 hover:-translate-y-3 bg-white/80 backdrop-blur-sm border-0 shadow-lg card-hover animate-fade-in-scale animate-delay-${(index + 1) * 100}`}
@@ -1270,7 +1363,6 @@ export default function HomePage() {
                     </form>
                   </CardContent>
                 </Card>
-                
               </div>
             </div>
           </div>
@@ -1285,8 +1377,8 @@ export default function HomePage() {
                 Frequently Asked Questions
               </h2>
               <p className="text-base sm:text-lg md:text-xl text-gray-600 max-w-3xl mx-auto px-4 leading-relaxed">
-                Find answers to common questions about AI Report Studio and how it can help you create outstanding academic
-                reports.
+                Find answers to common questions about AI Report Studio and how it can help you create outstanding
+                academic reports.
               </p>
             </div>
 
@@ -1308,10 +1400,12 @@ export default function HomePage() {
               </p>
               <div className="flex space-x-4">
                 <a href="#" className="text-gray-400 hover:text-white transition-colors">
-                  <span className="sr-only">Youtube</span><Youtube className="w-5 h-5 hover:text-red-500 transition-colors" />
+                  <span className="sr-only">Youtube</span>
+                  <Youtube className="w-5 h-5 hover:text-red-500 transition-colors" />
                 </a>
                 <a href="#" className="text-gray-400 hover:text-white transition-colors">
-                  <span className="sr-only">Instagram</span><Instagram className="w-5 h-5 hover:text-pink-500 transition-colors" />
+                  <span className="sr-only">Instagram</span>
+                  <Instagram className="w-5 h-5 hover:text-pink-500 transition-colors" />
                 </a>
                 <a
                   href="mailto:support@aiprojectreport.com"
@@ -1321,7 +1415,8 @@ export default function HomePage() {
                   <Mail className="w-5 h-5 hover:text-blue-500 transition-colors" />
                 </a>
                 <a href="#" className="text-gray-400 hover:text-white transition-colors">
-                  <span className="sr-only">LinkedIn</span><Linkedin className="w-5 h-5 hover:text-blue-700 transition-colors" />
+                  <span className="sr-only">LinkedIn</span>
+                  <Linkedin className="w-5 h-5 hover:text-blue-700 transition-colors" />
                 </a>
               </div>
             </div>
@@ -1407,14 +1502,14 @@ export default function HomePage() {
                   </a>
                 </li> */}
                 <li>
-                  <a href="#" className="text-gray-400 hover:text-white transition-colors">
+                  <Link href="/privacy" className="text-gray-400 hover:text-white transition-colors">
                     Privacy Policy
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="#" className="text-gray-400 hover:text-white transition-colors">
+                  <Link href="/terms" className="text-gray-400 hover:text-white transition-colors">
                     Terms of Service
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </div>

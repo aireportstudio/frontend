@@ -1,64 +1,74 @@
-// export async function GET() {
-//   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
-// <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-//   <url>
-//     <loc>https://www.aiprojectreport.com</loc>
-//     <lastmod>2024-01-15T00:00:00.000Z</lastmod>
-//     <changefreq>weekly</changefreq>
-//     <priority>1.0</priority>
-//   </url>
-//   <url>
-//     <loc>https://www.aiprojectreport.com/blog</loc>
-//     <lastmod>2024-01-15T00:00:00.000Z</lastmod>
-//     <changefreq>weekly</changefreq>
-//     <priority>0.8</priority>
-//   </url>
-// </urlset>`;
-
-//   return new Response(sitemap, {
-//     headers: {
-//       'Content-Type': 'application/xml',
-//     },
-//   });
-// }
-
-import { NextResponse } from "next/server";
-
-export const runtime = "edge"; // optional for edge runtime
+import { NextResponse } from "next/server"
+import { fetchAllPosts } from "@/lib/blogApi"
 
 export async function GET() {
-  // Fetch your blogs from API
-  const res = await fetch("https://ai-report-studio.projectwork9892.workers.dev/blogs");
-  const blogs = await res.json();
+  const baseUrl = "https://www.aiprojectreport.com"
 
-  // Start building sitemap XML
-  const urls = blogs.map((blog: any) => `
-    <url>
-      <loc>https://www.aiprojectreport.com/blog/${blog.slug}</loc>
-      <lastmod>${new Date(blog.updatedAt).toISOString()}</lastmod>
-      <changefreq>monthly</changefreq>
-      <priority>0.7</priority>
-    </url>
-  `).join("");
+  try {
+    const blogPosts = await fetchAllPosts()
 
-  const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
-  <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-    <url>
-      <loc>https://www.aiprojectreport.com</loc>
-      <lastmod>2024-01-15T00:00:00.000Z</lastmod>
-      <changefreq>weekly</changefreq>
-      <priority>1.0</priority>
-    </url>
-    <url>
-      <loc>https://www.aiprojectreport.com/blog</loc>
-      <lastmod>2024-01-15T00:00:00.000Z</lastmod>
-      <changefreq>weekly</changefreq>
-      <priority>0.8</priority>
-    </url>
-    ${urls}
-  </urlset>`;
+    const blogUrls = blogPosts
+      .map(
+        (post) => `
+  <url>
+    <loc>${baseUrl}/blog/${post.slug}</loc>
+    <lastmod>${new Date(post.publishedDate).toISOString()}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>`,
+      )
+      .join("")
 
-  return new NextResponse(sitemap, {
-    headers: { "Content-Type": "text/xml" },
-  });
+    const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>${baseUrl}</loc>
+    <lastmod>${new Date().toISOString()}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>${baseUrl}/blog</loc>
+    <lastmod>${new Date().toISOString()}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>${baseUrl}/privacy</loc>
+    <lastmod>${new Date().toISOString()}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>${baseUrl}/terms</loc>
+    <lastmod>${new Date().toISOString()}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>${blogUrls}
+</urlset>`
+
+    return new NextResponse(sitemap, {
+      headers: {
+        "Content-Type": "text/xml",
+        "Cache-Control": "public, s-maxage=600, stale-while-revalidate=3600",
+      },
+    })
+  } catch (error) {
+    console.error("Error generating sitemap:", error)
+    const fallbackSitemap = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>${baseUrl}</loc>
+    <lastmod>${new Date().toISOString()}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+</urlset>`
+
+    return new NextResponse(fallbackSitemap, {
+      headers: {
+        "Content-Type": "text/xml",
+      },
+    })
+  }
 }

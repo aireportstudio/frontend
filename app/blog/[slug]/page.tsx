@@ -426,7 +426,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         />
 
         {/* FAQ Section */}
-        <section className="mt-16">
+        {/* <section className="mt-16">
           <h2 className="text-2xl font-bold mb-6">Frequently Asked Questions</h2>
           <dl className="space-y-6">
             {faqs.map((faq, i) => (
@@ -436,7 +436,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
               </div>
             ))}
           </dl>
-        </section>
+        </section> */}
 
         <footer className="mt-12 pt-8 border-t border-gray-200">
           <p className="text-sm text-gray-600">
