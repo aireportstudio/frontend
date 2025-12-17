@@ -8,16 +8,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   let posts: any[] = [];
 
   try {
-    const blogPosts = await fetchAllPosts();
-    posts = Array.isArray(blogPosts) ? blogPosts : [];
-  } catch (error) {
-    console.error("Failed to fetch blog posts for sitemap:", error);
+    posts = await fetchAllPosts();
+  } catch (e) {
+    console.error("Sitemap fetch failed:", e);
   }
 
   return [
-    /* =========================
-       CORE PAGES
-    ========================= */
     {
       url: baseUrl,
       lastModified: now,
@@ -30,10 +26,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "daily" as const,
       priority: 0.9,
     },
-
-    /* =========================
-       LEGAL PAGES
-    ========================= */
     {
       url: `${baseUrl}/privacy`,
       lastModified: now,
@@ -46,10 +38,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "yearly" as const,
       priority: 0.4,
     },
-
-    /* =========================
-       BLOG POSTS
-    ========================= */
     ...posts.map((post: any) => ({
       url: `${baseUrl}/blog/${post.slug}`,
       lastModified: new Date(post.publishedDate || now),
