@@ -258,7 +258,8 @@ export default function HomePage() {
               className={`inline-flex items-center bg-blue-100/80 backdrop-blur-sm text-blue-800 px-4 py-2 rounded-full text-sm font-medium mb-8 animate-bounce-subtle ${isVisible ? "animate-fade-in-scale" : "opacity-0"}`}
             >
               <span className="mr-2 text-green-600">✓</span>
-              Trusted by 999+ Students
+              {/* Trusted by 999+ Students */}
+              100+ Students Join with us
             </div>
 
             <h1
@@ -291,6 +292,34 @@ export default function HomePage() {
             >
               <div className="text-center bg-white/60 backdrop-blur-sm rounded-xl p-6 card-hover animate-float-slow shadow-lg border border-white/20">
                 <AnimatedCounter
+                  end={10}
+                  suffix="+"
+                  className="text-2xl sm:text-3xl md:text-4xl font-bold text-blue-600 mb-2"
+                />
+                <div className="text-gray-600 text-sm sm:text-base font-medium">Modules</div>
+              </div>
+              <div className="text-center bg-white/60 backdrop-blur-sm rounded-xl p-6 card-hover animate-float-medium animate-delay-500 shadow-lg border border-white/20">
+                <AnimatedCounter
+                  end={100}
+                  suffix="+"
+                  className="text-2xl sm:text-3xl md:text-4xl font-bold text-blue-600 mb-2"
+                />
+                <div className="text-gray-600 text-sm sm:text-base font-medium">Students Registered</div>
+              </div>
+              <div className="text-center bg-white/60 backdrop-blur-sm rounded-xl p-6 card-hover animate-float-fast animate-delay-1000 shadow-lg border border-white/20">
+                <AnimatedCounter
+                  end={25}
+                  suffix="+"
+                  className="text-2xl sm:text-3xl md:text-4xl font-bold text-blue-600 mb-2"
+                />
+                <div className="text-gray-600 text-sm sm:text-base font-medium">Project Modules</div>
+              </div>
+            </div>
+            {/* <div
+              className={`grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 mb-12 max-w-2xl mx-auto ${isVisible ? "animate-fade-in-up animate-delay-400" : "opacity-0"}`}
+            >
+              <div className="text-center bg-white/60 backdrop-blur-sm rounded-xl p-6 card-hover animate-float-slow shadow-lg border border-white/20">
+                <AnimatedCounter
                   end={2999}
                   suffix="+"
                   className="text-2xl sm:text-3xl md:text-4xl font-bold text-blue-600 mb-2"
@@ -313,7 +342,7 @@ export default function HomePage() {
                 />
                 <div className="text-gray-600 text-sm sm:text-base font-medium">Success Rate</div>
               </div>
-            </div>
+            </div> */}
 
             <div
               className={`flex flex-col sm:flex-row justify-center items-center gap-4 mb-8 px-4 ${isVisible ? "animate-fade-in-up animate-delay-500" : "opacity-0"}`}
@@ -395,18 +424,30 @@ export default function HomePage() {
                       <div className="text-xl sm:text-2xl md:text-3xl font-bold text-blue-600">2+</div>
                       <div className="text-xs sm:text-sm text-gray-600 font-medium">Years of Excellence</div>
                     </div>
-                    <div className="text-center p-3 sm:p-4 card-hover bg-gradient-to-br from-cyan-50 to-cyan-100 rounded-lg min-h-[100px] flex flex-col justify-center animate-float-medium animate-delay-500">
+                    {/* <div className="text-center p-3 sm:p-4 card-hover bg-gradient-to-br from-cyan-50 to-cyan-100 rounded-lg min-h-[100px] flex flex-col justify-center animate-float-medium animate-delay-500">
                       <div className="text-xl sm:text-2xl md:text-3xl font-bold text-blue-600">2999+</div>
                       <div className="text-xs sm:text-sm text-gray-600 font-medium">Reports Generated</div>
+                    </div> */}
+                    <div className="text-center p-3 sm:p-4 card-hover bg-gradient-to-br from-cyan-50 to-cyan-100 rounded-lg min-h-[100px] flex flex-col justify-center animate-float-medium animate-delay-500">
+                      <div className="text-xl sm:text-2xl md:text-3xl font-bold text-blue-600">10+</div>
+                      <div className="text-xs sm:text-sm text-gray-600 font-medium">Modules</div>
                     </div>
-                    <div className="text-center p-3 sm:p-4 card-hover bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg min-h-[100px] flex flex-col justify-center animate-float-fast animate-delay-1000">
+                    {/* <div className="text-center p-3 sm:p-4 card-hover bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg min-h-[100px] flex flex-col justify-center animate-float-fast animate-delay-1000">
                       <div className="text-xl sm:text-2xl md:text-3xl font-bold text-blue-600">999+</div>
                       <div className="text-xs sm:text-sm text-gray-600 font-medium">Satisfied Students</div>
+                    </div> */}
+                    <div className="text-center p-3 sm:p-4 card-hover bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg min-h-[100px] flex flex-col justify-center animate-float-fast animate-delay-1000">
+                      <div className="text-xl sm:text-2xl md:text-3xl font-bold text-blue-600">100+</div>
+                      <div className="text-xs sm:text-sm text-gray-600 font-medium">Students Registered</div>
                     </div>
                     <div className="text-center p-3 sm:p-4 card-hover bg-gradient-to-br from-cyan-50 to-cyan-100 rounded-lg min-h-[100px] flex flex-col justify-center animate-float-medium animate-delay-1500">
+                      <div className="text-xl sm:text-2xl md:text-3xl font-bold text-blue-600">25+</div>
+                      <div className="text-xs sm:text-sm text-gray-600 font-medium">Project Domains</div>
+                    </div>
+                    {/* <div className="text-center p-3 sm:p-4 card-hover bg-gradient-to-br from-cyan-50 to-cyan-100 rounded-lg min-h-[100px] flex flex-col justify-center animate-float-medium animate-delay-1500">
                       <div className="text-xl sm:text-2xl md:text-3xl font-bold text-blue-600">98%</div>
                       <div className="text-xs sm:text-sm text-gray-600 font-medium">Success Rate</div>
-                    </div>
+                    </div> */}
                   </div>
                 </div>
 
@@ -455,6 +496,36 @@ export default function HomePage() {
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 md:gap-8 mb-12 md:mb-16">
               <div className="text-center bg-white rounded-lg p-4 shadow-sm hover:shadow-md transition-all duration-300 hover:scale-105">
                 <AnimatedCounter
+                  end={10}
+                  suffix="+"
+                  className="text-2xl sm:text-3xl md:text-4xl font-bold text-blue-600 mb-2"
+                />
+                <div className="text-gray-600 text-xs sm:text-sm font-medium">Modules</div>
+              </div>
+              <div className="text-center bg-white rounded-lg p-4 shadow-sm hover:shadow-md transition-all duration-300 hover:scale-105">
+                <AnimatedCounter
+                  end={100}
+                  suffix="+"
+                  className="text-2xl sm:text-3xl md:text-4xl font-bold text-blue-600 mb-2"
+                />
+                <div className="text-gray-600 text-xs sm:text-sm font-medium">Students Registered</div>
+              </div>
+              <div className="text-center bg-white rounded-lg p-4 shadow-sm hover:shadow-md transition-all duration-300 hover:scale-105">
+                <AnimatedCounter
+                  end={25}
+                  suffix="+"
+                  className="text-2xl sm:text-3xl md:text-4xl font-bold text-blue-600 mb-2"
+                />
+                <div className="text-gray-600 text-xs sm:text-sm font-medium">Project Modules</div>
+              </div>
+              <div className="text-center bg-white rounded-lg p-4 shadow-sm hover:shadow-md transition-all duration-300 hover:scale-105">
+                <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-blue-600 mb-2">4.9/5</div>
+                <div className="text-gray-600 text-xs sm:text-sm font-medium">Average Rating</div>
+              </div>
+            </div>
+            {/* <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 md:gap-8 mb-12 md:mb-16">
+              <div className="text-center bg-white rounded-lg p-4 shadow-sm hover:shadow-md transition-all duration-300 hover:scale-105">
+                <AnimatedCounter
                   end={2999}
                   suffix="+"
                   className="text-2xl sm:text-3xl md:text-4xl font-bold text-blue-600 mb-2"
@@ -481,7 +552,7 @@ export default function HomePage() {
                 <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-blue-600 mb-2">4.9/5</div>
                 <div className="text-gray-600 text-xs sm:text-sm font-medium">Average Rating</div>
               </div>
-            </div>
+            </div> */}
 
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 md:gap-8">
               <Card className="transition-all duration-300 hover:shadow-xl hover:scale-105 hover:-translate-y-2 group">
@@ -518,7 +589,8 @@ export default function HomePage() {
                 </CardHeader>
                 <CardContent>
                   <p className="text-gray-600 text-sm sm:text-base leading-relaxed">
-                    Join over 999+ successful students who have transformed their academic journey with our platform.
+                    {/* Join over 999+ successful students who have transformed their academic journey with our platform. */}
+                    Join over 100+ students to transformed their academic journey with our platform.
                   </p>
                 </CardContent>
               </Card>
