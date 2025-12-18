@@ -1,8 +1,5 @@
-# Redirect non-www HTTP to www HTTPS
-http://aiprojectreport.com/*     https://www.aiprojectreport.com/:splat   301
+# Force HTTPS + non-www (FINAL SAFE VERSION)
 
-# Redirect www HTTP to www HTTPS
-http://www.aiprojectreport.com/* https://www.aiprojectreport.com/:splat   301
-
-# Redirect non-www HTTPS to www HTTPS
-https://aiprojectreport.com/*    https://www.aiprojectreport.com/:splat   301
+http://aiprojectreport.com/*     https://aiprojectreport.com/:splat 301!
+http://www.aiprojectreport.com/* https://aiprojectreport.com/:splat 301!
+https://www.aiprojectreport.com/* https://aiprojectreport.com/:splat 301!
