@@ -1262,8 +1262,8 @@ export default function HomePage() {
                     <div>
                       <div className="font-semibold text-gray-900">Email Support</div>
                       <div className="text-gray-600 text-sm sm:text-base">
-                        <a href="mailto:support@aiprojectreport.com" className="hover:underline">
-                          support@aiprojectreport.com
+                        <a href="mailto:info@aiprojectreport.com" className="hover:underline">
+                          info@aiprojectreport.com
                         </a>
                       </div>
                       <div className="text-gray-500 text-xs sm:text-sm">Response within 24 hours</div>
@@ -1480,7 +1480,7 @@ export default function HomePage() {
                   <Instagram className="w-5 h-5 hover:text-pink-500 transition-colors" />
                 </a>
                 <a
-                  href="mailto:support@aiprojectreport.com"
+                  href="mailto:info@aiprojectreport.com"
                   className="text-gray-400 hover:text-white transition-colors"
                 >
                   <span className="sr-only">Email</span>

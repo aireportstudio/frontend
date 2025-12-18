@@ -337,7 +337,7 @@ export default function TermsOfService() {
 
           <h3>14.1 Informal Resolution</h3>
           <p>
-            Before filing a claim, you agree to contact us at support@aiprojectreport.com to attempt to resolve the
+            Before filing a claim, you agree to contact us at info@aiprojectreport.com to attempt to resolve the
             dispute informally.
           </p>
 
@@ -397,7 +397,7 @@ export default function TermsOfService() {
           <p>
             <strong>AI Report Studio</strong>
             <br />
-            Email: support@aiprojectreport.com
+            Email: info@aiprojectreport.com
             <br />
             Website: https://www.aiprojectreport.com/
           </p>

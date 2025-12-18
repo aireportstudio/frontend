@@ -175,7 +175,7 @@ const organizationData = {
     "@type": "ContactPoint",
     telephone: "+1-555-REPORTS",
     contactType: "customer service",
-    email: "support@aiprojectreport.com",
+    email: "info@aiprojectreport.com",
     availableLanguage: "English",
   },
   sameAs: [

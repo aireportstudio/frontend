@@ -183,7 +183,7 @@ export default function PrivacyPolicy() {
           <ul>
             <li>Clicking the unsubscribe link in any marketing email</li>
             <li>Updating your communication preferences in your account settings</li>
-            <li>Contacting us directly at support@aiprojectreport.com</li>
+            <li>Contacting us directly at info@aiprojectreport.com</li>
           </ul>
 
           <h3>5.3 Cookies</h3>
@@ -258,7 +258,7 @@ export default function PrivacyPolicy() {
           <p>
             <strong>AI Report Studio</strong>
             <br />
-            Email: support@aiprojectreport.com
+            Email: info@aiprojectreport.com
             <br />
             Website: https://www.aiprojectreport.com/
           </p>

@@ -127,8 +127,8 @@ export function MobileNav({ isOpen, onToggle }: MobileNavProps) {
               <div className="mt-8 pt-6 border-t border-gray-200">
                 <p className="text-sm text-gray-600 text-center">Need help? We're here 24/7</p>
                 <p className="text-sm font-medium text-blue-600 text-center mt-1">
-                  <a href="mailto:support@aiprojectreport.com" className="hover:underline">
-                    support@aiprojectreport.com
+                  <a href="mailto:info@aiprojectreport.com" className="hover:underline">
+                    info@aiprojectreport.com
                   </a>
                 </p>
               </div>
