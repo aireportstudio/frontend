@@ -261,6 +261,10 @@ export default function RootLayout({
             ezstandalone.cmd = ezstandalone.cmd || [];
           `}
         </Script>
+        <meta
+          name="ezoic-site-verification"
+          content="J8UbsqdJB6Zz83KFIQgi5OyPAvXYHh"
+        />
       </head>
       <body className="font-sans antialiased">
         {children}
