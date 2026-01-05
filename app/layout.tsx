@@ -3,8 +3,7 @@ import type { Metadata } from "next"
 import { Inter, Poppins } from "next/font/google"
 import "./globals.css"
 import { Toaster } from "react-hot-toast"
-import { EzoicIntegration } from "../components/ezoic-integration"
-
+import Script from "next/script";
 const inter = Inter({
   subsets: ["latin"],
   display: "swap",
@@ -239,10 +238,32 @@ export default function RootLayout({
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationData) }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteData) }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbData) }} />
+        {/* ================= EZOIC PRIVACY SCRIPTS (MUST BE FIRST) ================= */}
+        <Script
+          src="https://cmp.gatekeeperconsent.com/min.js"
+          data-cfasync="false"
+          strategy="beforeInteractive"
+        />
+        <Script
+          src="https://the.gatekeeperconsent.com/cmp.min.js"
+          data-cfasync="false"
+          strategy="beforeInteractive"
+        />
+
+        {/* ================= EZOIC HEADER SCRIPT ================= */}
+        <Script
+          src="https://www.ezojs.com/ezoic/sa.min.js"
+          strategy="afterInteractive"
+        />
+        <Script id="ezoic-init" strategy="afterInteractive">
+          {`
+            window.ezstandalone = window.ezstandalone || {};
+            ezstandalone.cmd = ezstandalone.cmd || [];
+          `}
+        </Script>
       </head>
       <body className="font-sans antialiased">
         {children}
-        <EzoicIntegration />
         <Toaster position="top-right" reverseOrder={false} />
       </body>
     </html>
